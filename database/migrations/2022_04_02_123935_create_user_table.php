@@ -4,6 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * CreateUserTable
+ * @author Gabriel Villamia <gabriel25han@gmail.com>
+ * @since 2022.04.02
+ * @version 1.0
+ */
 return new class extends Migration
 {
     /**
@@ -13,14 +19,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('failed_jobs', function (Blueprint $table) {
-            $table->id();
-            $table->string('uuid')->unique();
-            $table->text('connection');
-            $table->text('queue');
-            $table->longText('payload');
-            $table->longText('exception');
-            $table->timestamp('failed_at')->useCurrent();
+        Schema::create('user', function (Blueprint $oTable) {
+            $oTable->bigInteger('user_id');
+            $oTable->string('username', '150');
+            $oTable->string('password', '150');
+            $oTable->timestamp('created_at');
         });
     }
 
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('user');
     }
 };
