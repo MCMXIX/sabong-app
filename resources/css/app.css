@@ -1,3 +1,50 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'DM-sans';
+        font-weight: 400;
+        font-style: normal;
+        src: url('./fonts/DMSans-Regular.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'DM-sans';
+        font-weight: 400;
+        font-style: italic;
+        src: url('./fonts/DMSans-Italic.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'DM-sans';
+        font-weight: 500;
+        font-style: normal;
+        src: url('./fonts/DMSans-Medium.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'DM-sans';
+        font-weight: 500;
+        font-style: italic;
+        src: url('./fonts/DMSans-MediumItalic.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'DM-sans';
+        font-weight: 700;
+        font-style: normal;
+        src: url('./fonts/DMSans-Bold.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'DM-sans';
+        font-weight: 700;
+        font-style: italic;
+        src: url('./fonts/DMSans-BoldItalic.ttf') format('truetype');
+    }
+}
+
+body, * {
+    @apply font-dmSans;
+}
+
+body {
+
+}
