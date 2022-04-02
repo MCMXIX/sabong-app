@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//VUE ROUTES
+$aRoutes = [
+    'home' => '/',
+    //ADD ROUTES HERE FROM VUE ROUTER
+];
+
+foreach ($aRoutes as $sRouteName => $sVueRoute) {
+    Route::get($sVueRoute, function () {
+        return view('dashboard');
+    })->name($sRouteName);
+}
