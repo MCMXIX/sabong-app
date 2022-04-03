@@ -20,9 +20,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user', function (Blueprint $oTable) {
-            $oTable->bigInteger('user_id');
-            $oTable->string('username', '150');
-            $oTable->string('password', '150');
+            $oTable->bigInteger('user_id')->autoIncrement();
+            $oTable->string('username', '150')->unique();
+            $oTable->string('password', '255');
             $oTable->timestamp('created_at');
         });
     }

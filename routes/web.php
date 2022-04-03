@@ -24,3 +24,10 @@ foreach ($aRoutes as $sRouteName => $sVueRoute) {
         return view('dashboard');
     })->name($sRouteName);
 }
+
+// TODO: UPDATE CSRF TOKEN UNDER App\Http\Middleware/VerifyCsrfToken.php
+Route::namespace('App\Services\User\Controllers')->prefix('/api/user')->group(function () {
+    Route::post('/register', 'UserController@createUser');
+    Route::post('/login', 'UserController@login');
+    Route::get('/logout', 'UserController@logout');
+});
