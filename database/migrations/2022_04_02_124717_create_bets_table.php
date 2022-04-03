@@ -20,7 +20,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bets', function (Blueprint $oTable) {
-            $oTable->bigIncrements('bet_no');
+            $oTable->bigIncrements('bet_no')->autoIncrement();
             $oTable->integer('fight_no');
             $oTable->integer('user_id');
             $oTable->integer('amount');
