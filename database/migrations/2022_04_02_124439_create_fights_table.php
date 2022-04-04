@@ -22,8 +22,8 @@ return new class extends Migration
         Schema::create('fights', function (Blueprint $oTable) {
             $oTable->bigIncrements('fight_no')->autoIncrement();
             $oTable->integer('user_id');
-            $oTable->string('status', 1);
-            $oTable->string('game_winner', 1);
+            $oTable->string('status', 1)->nullable();
+            $oTable->string('game_winner', 1)->nullable();
             $oTable->timestamps();
         });
     }
