@@ -16,9 +16,9 @@
             </div>
             <div class="navbar--logo"></div>
             <a href="" class="navbar--logout">logout <span class="icon ic-logout"></span></a>
-            <div class="lg:hidden lg:icon ic-close cursor-pointer" @click="showDrawer()"></div>
+            <div class=" lg:icon ic-close cursor-pointer" @click="showDrawer()"></div>
         </div>
-
+        <div class="drawer--backdrop" :class="{'w-full': drawerActive}" @click="showDrawer()"></div>
     </div>
 </template>
 <script>
@@ -41,7 +41,7 @@ export default {
 </script>
 <style scoped>
 .navbar__container {
-    @apply h-full lg:h-24 absolute top-0 -left-2/3 lg:left-0 lg:relative w-2/3 md:w-1/2 bg-black-dark lg:w-full flex flex-col lg:flex-row text-2xl uppercase lg:px-8 lg:items-center drop-shadow-lg transition-all duration-200 ease-in-out;
+    @apply h-full lg:h-24 absolute top-0 -left-2/3 z-40 lg:left-0 lg:relative w-2/3 md:w-1/2 bg-black-dark lg:w-full flex flex-col lg:flex-row text-2xl uppercase lg:px-8 lg:items-center drop-shadow-lg transition-all duration-200 ease-in-out;
 }
 .navbar__container.active{
     @apply left-0;
@@ -83,5 +83,8 @@ export default {
 }
 .menu-icon {
     @apply w-8 h-1 bg-white mb-2 transition-all duration-100 ease-in-out;
+}
+.drawer--backdrop {
+    @apply h-full absolute left-0 top-0 lg:hidden bg-black bg-opacity-60 z-30
 }
 </style>
