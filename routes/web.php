@@ -31,3 +31,8 @@ Route::namespace('App\Services\User\Controllers')->prefix('/api/user')->group(fu
     Route::post('/login', 'UserController@login');
     Route::get('/logout', 'UserController@logout');
 });
+
+
+Route::namespace('App\Services\Bet\Controllers')->prefix('/api/bet')->group(function () {
+    Route::post('/', 'BetController@addBet');
+});
