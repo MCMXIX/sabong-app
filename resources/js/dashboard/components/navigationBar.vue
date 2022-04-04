@@ -15,8 +15,11 @@
                 <a class="nav-links" href="">Scan</a>
             </div>
             <div class="navbar--logo"></div>
-            <a href="" class="navbar--logout">logout <span class="icon ic-logout"></span></a>
-            <div class=" lg:icon ic-close cursor-pointer" @click="showDrawer()"></div>
+            <div class="navbar--user">
+                <button href="" class="navbar--register nav-links">register</button>
+                <button href="" class="navbar--logout">logout <span class="icon ic-logout"></span></button>
+            </div>
+            <button class="close__button" @click="showDrawer()"> <span class="lg:icon ic-close"></span> </button>
         </div>
         <div class="drawer--backdrop" :class="{'w-full': drawerActive}" @click="showDrawer()"></div>
     </div>
@@ -53,7 +56,7 @@ export default {
     @apply order-2;
 }
 .navbar--links .nav-links {
-    @apply lg:mr-4 relative flex lg:inline lg:flex-row py-2 pl-4 lg:pl-0 lg:border-0 border-b-2 border-gray-high;
+    @apply lg:mr-4 relative flex lg:inline lg:flex-row py-2 pl-4 lg:pl-0 lg:border-0 border-b-2 border-gray-high hover:bg-black-low;
 }
 .navbar--links .nav-links::after {
     content: '';
@@ -62,8 +65,17 @@ export default {
 .navbar--links .nav-links:hover::after {
     @apply lg:w-full;
 }
+.navbar--user {
+    @apply order-3 ml-auto mt-auto lg:mt-0 w-full lg:w-max lg:flex; 
+}
+.navbar--register {
+    @apply mr-4 w-full pl-4 lg:pl-0 py-3 uppercase  text-left border-t-2 lg:border-t-0 hover:brightness-75;
+}
 .navbar--logout {
-    @apply lg:ml-auto transition-all duration-150 ease-in-out order-3 mt-auto lg:mt-0 py-3 drop-shadow-lg pl-4 lg:pl-0;
+    @apply drop-shadow-lg border-t-2 py-3 pl-4 lg:p-0 lg:pl-0 w-full lg:w-auto text-left uppercase lg:border-t-0 shrink-0 hover:brightness-75;
+}
+.close__button {
+    @apply absolute right-0 hover:brightness-150 cursor-pointer w-8 lg:w-0 h-8;
 }
 .ic-logout {
     background: url('/img/ic-logout.svg') no-repeat center;
@@ -72,14 +84,8 @@ export default {
     height: 2rem;
     margin-left: 8px
 }
-.navbar--logout:hover {
-    @apply brightness-75;
-}
 .drawer__button {
     @apply h-max ml-5 mt-5;
-}
-.drawer__button:hover .menu-icon {
-    @apply bg-slate-300;
 }
 .menu-icon {
     @apply w-8 h-1 bg-white mb-2 transition-all duration-100 ease-in-out;
