@@ -14,7 +14,13 @@
                 <a class="nav-links" href="">Place Bet</a>
                 <a class="nav-links" href="">Scan</a>
             </div>
-            <div class="navbar--logo"></div>
+            <div class="navbar--logo relative">
+                <img class="w-1/2 lg:w-auto lg:h-20" src="/img/cockfight-logo.png" alt="">
+                <div class="logo--text absolute bottom-5 w-max lg:bottom-3">
+                    <p class=" italic text-3xl leading-tight">KLS</p>
+                    <p class="">Sabong App</p>
+                </div>
+            </div>
             <div class="navbar--user">
                 <button href="" class="navbar--register nav-links">register</button>
                 <button href="" class="navbar--logout">logout <span class="icon ic-logout"></span></button>
@@ -50,10 +56,10 @@ export default {
     @apply left-0;
 }
 .navbar--logo {
-    @apply mx-auto order-1 h-[161px] w-full border-b-2 border-gray-500 lg:hidden;
+    @apply mx-auto flex items-center flex-col lg:order-2 order-1 w-full lg:w-auto py-5 border-b-2 border-gray-500 lg:border-0 lg:h-auto text-center;
 }
 .navbar--links {
-    @apply order-2;
+    @apply lg:order-1 order-2;
 }
 .navbar--links .nav-links {
     @apply lg:mr-4 relative flex lg:inline lg:flex-row py-2 pl-4 lg:pl-0 lg:border-0 border-b-2 border-gray-high hover:bg-black-low;
@@ -92,5 +98,9 @@ export default {
 }
 .drawer--backdrop {
     @apply h-full absolute left-0 top-0 lg:hidden bg-black bg-opacity-60 z-30
+}
+.logo--text p{
+    -webkit-text-stroke: 1px #3E403E;
+    @apply font-bold drop-shadow-lg;
 }
 </style>
