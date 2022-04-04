@@ -1,0 +1,106 @@
+<template>
+    <div>
+        <div class="drawer lg:hidden">
+            <button class="drawer__button" @click="showDrawer()">
+                <div class="menu-icon"></div>
+                <div class="menu-icon"></div>
+                <div class="menu-icon"></div>
+            </button>
+        </div>
+        <div class="navbar__container" :class="{'active' : drawerActive}">
+            <div class="navbar--links">
+                <a class="nav-links" href="">HOME</a>
+                <a class="nav-links" href="">Dashboard</a>
+                <a class="nav-links" href="">Place Bet</a>
+                <a class="nav-links" href="">Scan</a>
+            </div>
+            <div class="navbar--logo relative">
+                <img class="w-1/2 lg:w-auto lg:h-20" src="/img/cockfight-logo.png" alt="">
+                <div class="logo--text absolute bottom-5 w-max lg:bottom-3">
+                    <p class=" italic text-3xl leading-tight">KLS</p>
+                    <p class="">Sabong App</p>
+                </div>
+            </div>
+            <div class="navbar--user">
+                <button href="" class="navbar--register nav-links">register</button>
+                <button href="" class="navbar--logout">logout <span class="icon ic-logout"></span></button>
+            </div>
+            <button class="close__button" @click="showDrawer()"> <span class="lg:icon ic-close"></span> </button>
+        </div>
+        <div class="drawer--backdrop" :class="{'w-full': drawerActive}" @click="showDrawer()"></div>
+    </div>
+</template>
+<script>
+export default {
+    name: 'home',
+    data() {
+        return {
+            drawerActive : false,
+        }
+    },
+    computed: {
+
+    },
+    methods: {
+            showDrawer : function() {
+            this.drawerActive = !this.drawerActive;
+        }
+    },
+}
+</script>
+<style scoped>
+.navbar__container {
+    @apply h-full lg:h-24 absolute top-0 -left-2/3 z-40 lg:left-0 lg:relative w-2/3 md:w-1/2 bg-black-dark lg:w-full flex flex-col lg:flex-row text-2xl uppercase lg:px-8 lg:items-center drop-shadow-lg transition-all duration-200 ease-in-out;
+}
+.navbar__container.active{
+    @apply left-0;
+}
+.navbar--logo {
+    @apply mx-auto flex items-center flex-col lg:order-2 order-1 w-full lg:w-auto py-5 border-b-2 border-gray-500 lg:border-0 lg:h-auto text-center;
+}
+.navbar--links {
+    @apply lg:order-1 order-2;
+}
+.navbar--links .nav-links {
+    @apply lg:mr-4 relative flex lg:inline lg:flex-row py-2 pl-4 lg:pl-0 lg:border-0 border-b-2 border-gray-high hover:bg-black-low;
+}
+.navbar--links .nav-links::after {
+    content: '';
+    @apply absolute bottom-0 h-0.5 left-0 w-0 bg-white origin-bottom-right transition-all duration-200 ease-in-out ;
+}
+.navbar--links .nav-links:hover::after {
+    @apply lg:w-full;
+}
+.navbar--user {
+    @apply order-3 ml-auto mt-auto lg:mt-0 w-full lg:w-max lg:flex; 
+}
+.navbar--register {
+    @apply mr-4 w-full pl-4 lg:pl-0 py-3 uppercase  text-left border-t-2 lg:border-t-0 hover:brightness-75;
+}
+.navbar--logout {
+    @apply drop-shadow-lg border-t-2 py-3 pl-4 lg:p-0 lg:pl-0 w-full lg:w-auto text-left uppercase lg:border-t-0 shrink-0 hover:brightness-75;
+}
+.close__button {
+    @apply absolute right-0 hover:brightness-150 cursor-pointer w-8 lg:w-0 h-8;
+}
+.ic-logout {
+    background: url('/img/ic-logout.svg') no-repeat center;
+    background-size: contain;
+    width: 2rem;
+    height: 2rem;
+    margin-left: 8px
+}
+.drawer__button {
+    @apply h-max ml-5 mt-5;
+}
+.menu-icon {
+    @apply w-8 h-1 bg-white mb-2 transition-all duration-100 ease-in-out;
+}
+.drawer--backdrop {
+    @apply h-full absolute left-0 top-0 lg:hidden bg-black bg-opacity-60 z-30
+}
+.logo--text p{
+    -webkit-text-stroke: 1px #3E403E;
+    @apply font-bold drop-shadow-lg;
+}
+</style>

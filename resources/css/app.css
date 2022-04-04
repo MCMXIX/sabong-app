@@ -41,6 +41,30 @@
     }
 }
 
+@layer utilities { 
+    .icon {
+        @apply inline-block align-bottom;
+    }
+    .ic-close::before,
+    .ic-close::after {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        content: '';
+        height: 33px;
+        width: 3px;
+        background-color: #555854;
+        @apply lg:hidden;
+    }
+    .ic-close:before {
+        transform: rotate(45deg);
+    }
+    
+    .ic-close:after {
+        transform: rotate(-45deg);
+    }
+}
+
 body, * {
     @apply font-dmSans text-white;
 }
@@ -48,3 +72,4 @@ body, * {
 body {
     @apply bg-black-dark;
 }
+
