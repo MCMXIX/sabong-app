@@ -44,9 +44,17 @@ module.exports = {
                 // => @media (min-width: 1024px) { ... }
                 'xl': '1280px',
                 // => @media (min-width: 1280px) { ... }
-                '2xl': '1536px',
+                '2xl': '1440px',
+                // => @media (min-width: 1440px) { ... }
+                '3xl': '1536px',
                 // => @media (min-width: 1536px) { ... }
-              },
+            },
+            letterSpacing: {
+                '1': '0rem',
+                '2': '0.025rem',
+                '3': '0.05rem',
+                '4': '0.1rem',
+            },
         },
     },
     plugins: [],

@@ -41,6 +41,12 @@
     }
 }
 
+@layer base {
+    h1 {
+        @apply text-5xl font-bold;
+    }
+}
+
 @layer utilities { 
     .icon {
         @apply inline-block align-bottom;
@@ -65,11 +71,23 @@
     }
 }
 
-body, * {
+html,
+body, 
+* {
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
     @apply font-dmSans text-white;
 }
 
+html {
+    height: -webkit-fill-available;
+}
+
 body {
-    @apply bg-black-dark;
+    @apply bg-black-low;
+    min-height: -webkit-fill-available;
+}
+
+.button--primary {
+    @apply bg-green-med shadow-lg transition-colors duration-200 ease-in-out focus:outline-green-high focus:outline-none outline-1 focus:bg-green-med hover:bg-green-low uppercase;
 }
 

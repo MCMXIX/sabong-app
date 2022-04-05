@@ -1,7 +1,9 @@
 <template>
     <div>
         <nav-bar/>
-        <router-view />
+        <div class="content__container">
+            <router-view />
+        </div>
     </div>
 </template>
 <script>
@@ -20,3 +22,9 @@ export default {
     },  
 }
 </script>
+<style scoped>
+.content__container {
+    min-height: -webkit-fill-available;
+    @apply lg:h-screen flex flex-col max-w-[1280px] lg:bg-black-dark mx-auto lg:shadow-lg;
+}
+</style>

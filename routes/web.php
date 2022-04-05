@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 //VUE ROUTES
 $aRoutes = [
-    'home' => '/',
+    'home'     => '/',
+    'register' => '/register',
     //ADD ROUTES HERE FROM VUE ROUTER
 ];
 

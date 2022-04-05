@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="absolute h-full lg:relative" :class="{'w-full' :drawerActive}">
         <div class="drawer lg:hidden">
             <button class="drawer__button" @click="showDrawer()">
                 <div class="menu-icon"></div>
@@ -7,14 +7,14 @@
                 <div class="menu-icon"></div>
             </button>
         </div>
-        <div class="navbar__container" :class="{'active' : drawerActive}">
+        <div class="navbar__container overflow-hidden" :class="{'active' : drawerActive}">
             <div class="navbar--links">
                 <a class="nav-links" href="">HOME</a>
                 <a class="nav-links" href="">Dashboard</a>
                 <a class="nav-links" href="">Place Bet</a>
                 <a class="nav-links" href="">Scan</a>
             </div>
-            <div class="navbar--logo relative">
+            <div class="navbar--logo 2xl:pl-24 relative">
                 <img class="w-1/2 lg:w-auto lg:h-20" src="/img/cockfight-logo.png" alt="">
                 <div class="logo--text absolute bottom-5 w-max lg:bottom-3">
                     <p class=" italic text-3xl leading-tight">KLS</p>

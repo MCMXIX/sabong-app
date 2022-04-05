@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './dashboard/views/home.vue'; 
+import Register from './dashboard/views/register.vue'; 
 
 Vue.use(Router);
 
@@ -21,6 +22,11 @@ export default new Router({
             path : '/',
             name : 'index',
             component : Home
+        }, 
+        {
+            path : '/register',
+            name : 'register',
+            component : Register
         }, 
     ]
 });
