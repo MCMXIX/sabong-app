@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 //VUE ROUTES
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
 $aRoutes = [
     'home'     => '/',
     'register' => '/register',
-    'login'    => '/login'
     //ADD ROUTES HERE FROM VUE ROUTER
 ];
 
