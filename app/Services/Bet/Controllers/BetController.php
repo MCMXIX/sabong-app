@@ -7,6 +7,8 @@ use App\Services\Bet\BetService;
 use App\Services\Bet\Requests\AddBetRequest;
 use App\Services\Fight\FightService;
 use App\Services\Fight\Models\FightModel;
+use App\Services\User\Models\UserModel;
+use App\Services\User\UserService;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -38,7 +40,8 @@ class BetController extends Controller
      */
     public function addBet(AddBetRequest $oRequest) : JsonResponse
     {
+        $this->oBetService->setUserService(new UserService(new UserModel()));
         $aResult = $this->oBetService->addBet($oRequest->validated());
-        return response()->json($aResult['message'], $aResult['code']);
+        return response()->json($aResult['data'], $aResult['code']);
     }
 }
