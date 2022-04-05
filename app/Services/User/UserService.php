@@ -71,4 +71,15 @@ class UserService
             'message' => 'Login success'
         ];
     }
+
+    /**
+     * getUsernameById
+     * @param int $iUserId
+     * @return string
+     */
+    public function getUsernameById(int $iUserId) : string
+    {
+        $aUser = $this->oUserModel->getUsernameById($iUserId);
+        return Arr::get(Arr::first($aUser), 'username', '');
+    }
 }
