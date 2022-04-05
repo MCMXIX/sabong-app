@@ -1,8 +1,6 @@
 <template>
     <div>
-        <h1 class="text-3xl font-bold underline">
-            Hello world!
-        </h1>
+        <h1>test</h1>
     </div>
 </template>
 
@@ -11,7 +9,6 @@ export default {
     name: 'home',
     data() {
         return {
-
         }
     }
 }

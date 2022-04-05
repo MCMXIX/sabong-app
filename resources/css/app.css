@@ -1,3 +1,93 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'DM-sans';
+        font-weight: 400;
+        font-style: normal;
+        src: url('./fonts/DMSans-Regular.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'DM-sans';
+        font-weight: 400;
+        font-style: italic;
+        src: url('./fonts/DMSans-Italic.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'DM-sans';
+        font-weight: 500;
+        font-style: normal;
+        src: url('./fonts/DMSans-Medium.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'DM-sans';
+        font-weight: 500;
+        font-style: italic;
+        src: url('./fonts/DMSans-MediumItalic.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'DM-sans';
+        font-weight: 700;
+        font-style: normal;
+        src: url('./fonts/DMSans-Bold.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'DM-sans';
+        font-weight: 700;
+        font-style: italic;
+        src: url('./fonts/DMSans-BoldItalic.ttf') format('truetype');
+    }
+}
+
+@layer base {
+    h1 {
+        @apply text-5xl font-bold;
+    }
+}
+
+@layer utilities { 
+    .icon {
+        @apply inline-block align-bottom;
+    }
+    .ic-close::before,
+    .ic-close::after {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        content: '';
+        height: 33px;
+        width: 3px;
+        background-color: #555854;
+        @apply lg:hidden;
+    }
+    .ic-close:before {
+        transform: rotate(45deg);
+    }
+    
+    .ic-close:after {
+        transform: rotate(-45deg);
+    }
+}
+
+html,
+body, 
+* {
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+    @apply font-dmSans text-white;
+}
+
+html {
+    height: -webkit-fill-available;
+}
+
+body {
+    @apply bg-black-low;
+    min-height: -webkit-fill-available;
+}
+
+.button--primary {
+    @apply bg-green-med shadow-lg transition-colors duration-200 ease-in-out focus:outline-green-high focus:outline-none outline-1 focus:bg-green-med hover:bg-green-low uppercase;
+}
+
