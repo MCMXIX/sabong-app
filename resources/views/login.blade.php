@@ -9,7 +9,7 @@
     <title>Sabong App</title>
 
     <!-- Scripts -->
-    <script type="text/javascript" src="{{ mix('/js/app.js') }}" defer></script>
+    <script type="text/javascript" src="{{ mix('/js/login.js') }}" defer></script>
     <!--- Fonts --->
     <link rel="preload" href="./fonts/DMSans-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
     <link rel="preload" href="./fonts/DMSans-italic.ttf" as="font" type="font/ttf" crossorigin="anonymous">
@@ -22,7 +22,7 @@
 </head>
 
 <body class="w-full">
-    <div id="dashboard">
+    <div id="login">
     </div>
 </body>
 

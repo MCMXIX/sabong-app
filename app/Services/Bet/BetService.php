@@ -4,6 +4,7 @@ namespace App\Services\Bet;
 
 use App\Services\Bet\Models\BetModel;
 use App\Services\Fight\FightService;
+use App\Services\User\UserService;
 use Illuminate\Support\Arr;
 
 /**
@@ -25,6 +26,11 @@ class BetService
     private $oFightService;
 
     /**
+     * @var UserService
+     */
+    private $oUserService;
+
+    /**
      * BetService constructor.
      * @param BetModel $oBetModel
      */
@@ -43,6 +49,14 @@ class BetService
     }
 
     /**
+     * setUserService
+     */
+    public function setUserService(UserService $oUserService)
+    {
+        $this->oUserService = $oUserService;
+    }
+
+    /**
      * addBet
      * @param array $aParameter
      * @return array
@@ -52,21 +66,30 @@ class BetService
         $aFightStatus = $this->checkFightStatus($aParameter['fight_no']);
         if (Arr::get($aFightStatus, 'status', false) === false) {
             return [
-                'code'    => 422,
-                'message' => $aFightStatus['message']
+                'code' => 422,
+                'data' => [
+                    'message' => $aFightStatus['message']
+                ]
             ];
         }
         
         $aParameter['status'] = 'F';
         $aParameter['user_id'] = session('user_id');
         $aBet = $this->oBetModel->addBet($aParameter);
-
-        $this->generateReciept();
         //TODO : WebSocket Update Data from vuex
 
         return [
-            'code'    => 200,
-            'message' => 'Succefully bet!'
+            'code' => 200,
+            'data' => [
+                'message'  => 'Succefully bet!',
+                'bet_info' => [
+                    'fight_no'     => $aParameter['fight_no'],
+                    'processed_by' => $this->oUserService->getUsernameById(session('user_id')),
+                    'amount'       => $aParameter['amount'],
+                    'side'         => ($aParameter['side'] === 'W') ? 'WALA' : 'MERON',
+                    'date'         => date('F j, Y, g:i a')
+                ]
+            ]
         ];
     }
 
@@ -94,10 +117,5 @@ class BetService
         }
 
         return ['status' => true];
-    }
-
-    private function generateReciept()
-    {
-        //TODO : GENERATE RECIEPT FOR BETS
     }
 }

@@ -62,4 +62,14 @@ class UserModel extends Model
     {
         return $this->where('username', $sUsername)->get()->toArray();
     }
+
+    /**
+     * getUsernameById
+     * @param int $iUserId
+     * @return array
+     */
+    public function getUsernameById(int $iUserId) : array
+    {
+        return $this->where('user_id', $iUserId)->get()->toArray();
+    }
 }
