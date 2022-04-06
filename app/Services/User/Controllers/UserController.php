@@ -56,6 +56,6 @@ class UserController extends Controller
     public function logout()
     {
         session()->flush();
-        //TODO : REDIRECT TO HOME
+        return redirect()->route('login');
     }
 }

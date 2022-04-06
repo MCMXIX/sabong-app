@@ -22,8 +22,8 @@
                 </div>
             </div>
             <div class="navbar--user">
-                <router-link href="/register"  :to="'#'" class="navbar--register nav-links block">register</router-link>
-                <a href="" class="navbar--logout blocked w-full">logout <span class="icon ic-logout"></span></a>
+                <router-link :to="'/register'" class="navbar--register nav-links block">register</router-link>
+                <a href="/api/user/logout" class="navbar--logout blocked w-full">logout <span class="icon ic-logout"></span></a>
             </div>
             <button class="close__button" @click="showDrawer()"> <span class="lg:icon ic-close"></span> </button>
         </div>
