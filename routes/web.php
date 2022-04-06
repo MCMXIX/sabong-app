@@ -13,31 +13,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//VUE ROUTES
+/** VUE ROUTES **/
 Route::get('/login', function () {
     return view('login');
-})->name('login');
+})->middleware(['userLoginCheck'])->name('login');
 
 $aRoutes = [
     'home'     => '/',
     'register' => '/register',
-    //ADD ROUTES HERE FROM VUE ROUTER
 ];
 
 foreach ($aRoutes as $sRouteName => $sVueRoute) {
     Route::get($sVueRoute, function () {
         return view('dashboard');
-    })->name($sRouteName);
+    })->middleware(['userAuth'])->name($sRouteName);
 }
+/** -- END VUE ROUTES -- **/
 
+/** API ROUTES **/
 // TODO: UPDATE CSRF TOKEN UNDER App\Http\Middleware/VerifyCsrfToken.php
 Route::namespace('App\Services\User\Controllers')->prefix('/api/user')->group(function () {
-    Route::post('/register', 'UserController@createUser');
-    Route::post('/login', 'UserController@login');
-    Route::get('/logout', 'UserController@logout');
+    Route::post('/login', 'UserController@login')->middleware(['userLoginCheck']);
+    Route::middleware(['userAuth'])->group(function() {
+        Route::post('/register', 'UserController@createUser');
+        Route::get('/logout', 'UserController@logout');
+    });
 });
 
 
 Route::namespace('App\Services\Bet\Controllers')->prefix('/api/bet')->group(function () {
     Route::post('/', 'BetController@addBet');
 });
+/** END API ROUTES **/

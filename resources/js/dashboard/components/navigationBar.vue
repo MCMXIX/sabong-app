@@ -22,8 +22,8 @@
                 </div>
             </div>
             <div class="navbar--user">
-                <button href="" class="navbar--register nav-links">register</button>
-                <button href="" class="navbar--logout">logout <span class="icon ic-logout"></span></button>
+                <router-link :to="'/register'" class="navbar--register nav-links">register</router-link>
+                <a href="/api/user/logout" class="navbar--logout">logout <span class="icon ic-logout"></span></a>
             </div>
             <button class="close__button" @click="showDrawer()"> <span class="lg:icon ic-close"></span> </button>
         </div>
