@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Services\Bet\Requests;
+namespace App\Services\Fight\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * AddBetRequest
- * @package App\Services\Bet\Requests\
+ * UpdateFightRequest
+ * @package App\Services\Fight\Requests\
  * @since 2022.04.04
  * @version 1.0
  */
-class AddBetRequest extends FormRequest
+class UpdateFightRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,9 +30,9 @@ class AddBetRequest extends FormRequest
     public function rules()
     {
         return [
-            'fight_no' => 'required|integer',
-            'amount'   => 'required|integer|digits_between:3,10',
-            'side'     => 'required|in:M,W'
+            'fight_no'    => 'required|integer',
+            'status'      => 'required|in:O,C,D',
+            'game_winner' => 'sometimes|required|in:W,M,D'
         ];
     }
 }

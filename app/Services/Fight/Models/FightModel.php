@@ -23,6 +23,15 @@ class FightModel extends Model
     protected $primaryKey = 'fight_no';
 
     /**
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'status',
+        'game_winner'
+    ];
+
+    /**
      * getFightByNo
      * @param int $iNumber
      * @return array
@@ -30,5 +39,36 @@ class FightModel extends Model
     public function getFightByNo(int $iNumber) : array
     {
         return $this->where('fight_no', $iNumber)->get()->toArray();
+    }
+
+    /**
+     * createFight
+     * @param array $aParameters
+     * @return mix
+     */
+    public function createFight(array $aParameters)
+    {
+        return $this->create($aParameters)->toArray();
+    }
+
+    /**
+     * getOpenFights
+     * @param string $sStatus
+     * @return array
+     */
+    public function getOpenFights() : array
+    {
+        return $this->whereIn('status', ['O', 'C'])->orWhereNull('status')->get()->toArray();
+    }
+
+    /**
+     * updateFight
+     * @param int $iFightNo
+     * @param array $aParameters
+     * @return int
+     */
+    public function updateFight(int $iFightNo, array $aParameters) : int
+    {
+        return $this->where('fight_no', $iFightNo)->update($aParameters);
     }
 }
