@@ -1,5 +1,5 @@
 <template>
-    <div class="absolute h-full lg:relative" :class="{'w-full' :drawerActive}">
+    <div class="fixed h-full lg:relative" :class="{'w-full' :drawerActive}">
         <div class="drawer lg:hidden">
             <button class="drawer__button" @click="showDrawer()">
                 <div class="menu-icon"></div>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="navbar--user">
-                <button href="" class="navbar--register nav-links">register</button>
+                <a href="/register" class="navbar--register nav-links block">register</a>
                 <button href="" class="navbar--logout">logout <span class="icon ic-logout"></span></button>
             </div>
             <button class="close__button" @click="showDrawer()"> <span class="lg:icon ic-close"></span> </button>
@@ -91,7 +91,7 @@ export default {
     margin-left: 8px
 }
 .drawer__button {
-    @apply h-max ml-5 mt-5;
+    @apply h-max ml-2 mt-5;
 }
 .menu-icon {
     @apply w-8 h-1 bg-white mb-2 transition-all duration-100 ease-in-out;
