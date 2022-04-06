@@ -79,9 +79,6 @@ export default {
 .navbar--logout {
     @apply drop-shadow-lg border-t-2 py-3 pl-4 lg:p-0 lg:pl-0 w-full lg:w-auto text-left uppercase lg:border-t-0 shrink-0 hover:brightness-75;
 }
-.close__button {
-    @apply absolute right-0 hover:brightness-150 cursor-pointer w-8 lg:w-0 h-8;
-}
 .ic-logout {
     background: url('/img/ic-logout.svg') no-repeat center;
     background-size: contain;
@@ -91,6 +88,12 @@ export default {
 }
 .drawer__button {
     @apply h-max ml-2 mt-5;
+}
+.ic-close::before,
+.ic-close::after {
+    top: 10px;
+    right: 20px;
+    @apply lg:hidden
 }
 .menu-icon {
     @apply w-8 h-1 bg-white mb-2 transition-all duration-100 ease-in-out;

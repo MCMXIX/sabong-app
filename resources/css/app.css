@@ -54,13 +54,10 @@
     .ic-close::before,
     .ic-close::after {
         position: absolute;
-        top: 10px;
-        right: 20px;
         content: '';
         height: 33px;
         width: 3px;
         background-color: #555854;
-        @apply lg:hidden;
     }
     .ic-close:before {
         transform: rotate(45deg);
@@ -74,6 +71,23 @@
     }
     .text--warn {
         @apply text-red-high font-bold
+    }
+}
+
+@layer components {
+    .button--primary {
+        @apply bg-green-med shadow-lg transition-colors rounded duration-200 ease-in-out focus:outline-green-high focus:outline-none outline-1 focus:bg-green-med hover:bg-green-low uppercase;
+    }
+    .button--secondary {
+        @apply bg-gray-low shadow-lg transition-colors rounded duration-200 ease-in-out focus:outline-gray-high focus:outline-none outline-1 focus:bg-gray-med hover:bg-gray-med uppercase;
+    }
+    
+    .button--warn {
+        @apply bg-red-med shadow-lg transition-colors rounded duration-200 ease-in-out focus:outline-red-high focus:outline-none outline-1 focus:bg-red-med hover:bg-red-low uppercase;
+    }
+
+    .button--robi {
+        @apply bg-blue-low border-2 border-blue-high transition-colors rounded duration-200 ease-in-out focus:outline-blue-high focus:outline-none outline-1 focus:bg-blue-med hover:bg-blue-med uppercase;
     }
 }
 
@@ -93,15 +107,7 @@ body {
     min-height: -webkit-fill-available;
 }
 
-.button--primary {
-    @apply bg-green-med shadow-lg transition-colors rounded duration-200 ease-in-out focus:outline-green-high focus:outline-none outline-1 focus:bg-green-med hover:bg-green-low uppercase;
-}
-
-.button--secondary {
-    @apply bg-gray-low shadow-lg transition-colors rounded duration-200 ease-in-out focus:outline-gray-high focus:outline-none outline-1 focus:bg-gray-med hover:bg-gray-med uppercase;
-}
-
-.button--warn {
-    @apply bg-red-med shadow-lg transition-colors rounded duration-200 ease-in-out focus:outline-red-high focus:outline-none outline-1 focus:bg-red-med hover:bg-red-low uppercase;
+.close__button {
+    @apply absolute right-0 hover:brightness-150 cursor-pointer w-8 lg:w-0 h-8;
 }
 
