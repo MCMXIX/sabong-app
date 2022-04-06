@@ -21,6 +21,7 @@ Route::get('/login', function () {
 $aRoutes = [
     'home'     => '/',
     'register' => '/register',
+    'fight'    => '/fight',
     //ADD ROUTES HERE FROM VUE ROUTER
 ];
 
