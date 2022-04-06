@@ -41,8 +41,12 @@ Route::namespace('App\Services\User\Controllers')->prefix('/api/user')->group(fu
     });
 });
 
-
+//BET API ROUTES
 Route::namespace('App\Services\Bet\Controllers')->prefix('/api/bet')->group(function () {
     Route::post('/', 'BetController@addBet');
 });
-/** END API ROUTES **/
+
+Route::namespace('App\Services\Fight\Controllers')->prefix('/api/fight')->group(function () {
+    Route::post('/', 'FightController@addFight');
+    Route::post('/update', 'FightController@updateFight');
+});

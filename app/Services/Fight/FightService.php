@@ -3,6 +3,7 @@
 namespace App\Services\Fight;
 
 use App\Services\Fight\Models\FightModel;
+use Illuminate\Support\Arr;
 
 /**
  * FightService
@@ -34,5 +35,58 @@ class FightService
     public function getFightByNo(int $iNumber) : array
     {
         return $this->oFightModel->getFightByNo($iNumber);
+    }
+
+    /**
+     * createFight
+     * @return array
+     */
+    public function createFight() : array
+    {
+        if (empty($this->oFightModel->getOpenFights()) === false) {
+            return [
+                'code' => 400,
+                'data' => [
+                    'message' => 'There is fight still on going. Please mark the current fight done to proceed'
+                ]
+            ];
+        }
+
+        $aFight = $this->oFightModel->createFight(['user_id' => session('user_id')]);
+        //TODO : WEBSOCKET
+
+        return [
+            'code' => 200,
+            'data' => [
+                'message' => 'Created successfully.'
+            ]
+        ];
+    }
+
+    /**
+     * updateFight
+     * @param array $aParameters
+     * @return array
+     */
+    public function updateFight(array $aParameters) : array
+    {
+        $iFightNo = Arr::pull($aParameters, 'fight_no');
+        if ((int)$this->oFightModel->updateFight($iFightNo, $aParameters) < 1) {
+            return [
+                'code' => 404,
+                'data' => [
+                    'message' => 'Fight doesn\'t exist!'
+                ]
+            ];
+        }
+        
+        //TODO : WEBSOCKET
+
+        return [
+            'code' => 200,
+            'data' => [
+                'message' => 'Updated successfully.'
+            ]
+        ];
     }
 }
