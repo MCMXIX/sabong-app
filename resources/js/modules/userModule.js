@@ -41,6 +41,26 @@ const actions = {
                 commit('SET_LOGIN_ERROR', false);
                 commit('SET_LOGIN_ERROR_MESSAGE', oError.response.data);
             });
+    },
+
+    /**
+     * createUser
+     * @param object commit
+     * @param {object} oCredentials 
+     */
+    async createUser({ commit }, oCredentials) {
+        await oUserService.createUser(oCredentials)
+            .then(() => {
+                alert('Successfully created.');
+            })
+            .catch(oError => {
+                if (oError.response.status === 422) {
+                    alert('Please check the username or password.');
+                    return;
+                }
+
+                alert('Something wen\'t wrong creating new user.');
+            });
     }
 }
 
