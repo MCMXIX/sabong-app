@@ -53,9 +53,9 @@ input {
     @apply h-9 max-w-md  rounded text-black font-medium focus:outline-none focus:ring focus:border-cyan-400 px-2 text-2xl 
 }
 .form__field {
-    @apply relative w-max mx-auto text-left;
+    @apply relative z-20 w-max mx-auto text-left;
 }
 .input--tooltip {
-    @apply lg:absolute -right-40 top-[1.70rem] w-36;
+    @apply lg:absolute z-20 -right-40 top-[1.70rem] w-36;
 }
 </style>

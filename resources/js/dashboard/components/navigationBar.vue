@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed h-full lg:relative" :class="{'w-full' :drawerActive}">
+    <div class="fixed z-50 h-full lg:relative" :class="{'w-full' :drawerActive}">
         <div class="drawer lg:hidden">
             <button class="drawer__button" @click="showDrawer()">
                 <div class="menu-icon"></div>
@@ -17,7 +17,6 @@
             <div class="navbar--logo 2xl:pl-24 relative">
                 <img class="w-1/2 lg:w-auto lg:h-20" src="/img/cockfight-logo.png" alt="">
                 <div class="logo--text absolute bottom-5 w-max lg:bottom-3">
-                    <p class=" italic text-3xl leading-tight">KLS</p>
                     <p class="">Sabong App</p>
                 </div>
             </div>
