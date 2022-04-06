@@ -1,5 +1,5 @@
 <template>
-    <div class="absolute h-full lg:relative" :class="{'w-full' :drawerActive}">
+    <div class="fixed h-full lg:relative" :class="{'w-full' :drawerActive}">
         <div class="drawer lg:hidden">
             <button class="drawer__button" @click="showDrawer()">
                 <div class="menu-icon"></div>
@@ -22,8 +22,8 @@
                 </div>
             </div>
             <div class="navbar--user">
-                <router-link :to="'/register'" class="navbar--register nav-links">register</router-link>
-                <a href="/api/user/logout" class="navbar--logout">logout <span class="icon ic-logout"></span></a>
+                <router-link :to="'/register'" class="navbar--register nav-links block">register</router-link>
+                <a href="/api/user/logout" class="navbar--logout blocked w-full">logout <span class="icon ic-logout"></span></a>
             </div>
             <button class="close__button" @click="showDrawer()"> <span class="lg:icon ic-close"></span> </button>
         </div>
@@ -50,7 +50,7 @@ export default {
 </script>
 <style scoped>
 .navbar__container {
-    @apply h-full lg:h-24 absolute top-0 -left-2/3 z-40 lg:left-0 lg:relative w-2/3 md:w-1/2 bg-black-dark lg:w-full flex flex-col lg:flex-row text-2xl uppercase lg:px-8 lg:items-center drop-shadow-lg transition-all duration-200 ease-in-out;
+    @apply h-full lg:h-24 absolute top-0 -left-3/4 z-40 lg:left-0 lg:relative w-2/3 md:w-1/2 bg-black-dark lg:w-full flex flex-col lg:flex-row text-2xl uppercase lg:px-8 lg:items-center drop-shadow-lg transition-all duration-200 ease-in-out;
 }
 .navbar__container.active{
     @apply left-0;
@@ -72,7 +72,7 @@ export default {
     @apply lg:w-full;
 }
 .navbar--user {
-    @apply order-3 ml-auto mt-auto lg:mt-0 w-full lg:w-max lg:flex; 
+    @apply order-3 ml-auto mt-auto lg:mt-0 w-full lg:w-max lg:flex lg:items-center flex flex-col lg:flex-row; 
 }
 .navbar--register {
     @apply mr-4 w-full pl-4 lg:pl-0 py-3 uppercase  text-left border-t-2 lg:border-t-0 hover:brightness-75;
@@ -91,7 +91,7 @@ export default {
     margin-left: 8px
 }
 .drawer__button {
-    @apply h-max ml-5 mt-5;
+    @apply h-max ml-2 mt-5;
 }
 .menu-icon {
     @apply w-8 h-1 bg-white mb-2 transition-all duration-100 ease-in-out;

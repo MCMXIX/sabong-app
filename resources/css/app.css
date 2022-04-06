@@ -69,6 +69,12 @@
     .ic-close:after {
         transform: rotate(-45deg);
     }
+    .text--success {
+        @apply text-green-high font-bold
+    }
+    .text--warn {
+        @apply text-red-high font-bold
+    }
 }
 
 html,
@@ -88,6 +94,14 @@ body {
 }
 
 .button--primary {
-    @apply bg-green-med shadow-lg transition-colors duration-200 ease-in-out focus:outline-green-high focus:outline-none outline-1 focus:bg-green-med hover:bg-green-low uppercase;
+    @apply bg-green-med shadow-lg transition-colors rounded duration-200 ease-in-out focus:outline-green-high focus:outline-none outline-1 focus:bg-green-med hover:bg-green-low uppercase;
+}
+
+.button--secondary {
+    @apply bg-gray-low shadow-lg transition-colors rounded duration-200 ease-in-out focus:outline-gray-high focus:outline-none outline-1 focus:bg-gray-med hover:bg-gray-med uppercase;
+}
+
+.button--warn {
+    @apply bg-red-med shadow-lg transition-colors rounded duration-200 ease-in-out focus:outline-red-high focus:outline-none outline-1 focus:bg-red-med hover:bg-red-low uppercase;
 }
 

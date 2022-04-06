@@ -21,6 +21,7 @@ Route::get('/login', function () {
 $aRoutes = [
     'home'     => '/',
     'register' => '/register',
+    'fight'    => '/fight'
 ];
 
 foreach ($aRoutes as $sRouteName => $sVueRoute) {
