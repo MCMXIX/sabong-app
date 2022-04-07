@@ -9,10 +9,10 @@
         </div>
         <div class="navbar__container overflow-hidden" :class="{'active' : drawerActive}">
             <div class="navbar--links">
-                <a class="nav-links" href="">HOME</a>
-                <a class="nav-links" href="">Dashboard</a>
-                <a class="nav-links" href="">Place Bet</a>
-                <a class="nav-links" href="">Scan</a>
+                <router-link :to="'#'" class="nav-links" href="">HOME</router-link :to="'#'">
+                <router-link :to="'/fight'" class="nav-links" href="">Dashboard</router-link>
+                <router-link :to="'#'" class="nav-links" href="">Place Bet</router-link>
+                <router-link :to="'#'" class="nav-links" href="">Scan</router-link>
             </div>
             <div class="navbar--logo 2xl:pl-24 relative">
                 <img class="w-1/2 lg:w-auto lg:h-20" src="/img/cockfight-logo.png" alt="">
@@ -42,10 +42,10 @@ export default {
 
     },
     methods: {
-            showDrawer : function() {
+        showDrawer : function() {
             this.drawerActive = !this.drawerActive;
         }
-    },
+    }
 }
 </script>
 <style scoped>

@@ -47,6 +47,6 @@ Route::namespace('App\Services\Bet\Controllers')->prefix('/api/bet')->group(func
 });
 
 Route::namespace('App\Services\Fight\Controllers')->prefix('/api/fight')->group(function () {
-    Route::post('/', 'FightController@addFight');
+    Route::get('/', 'FightController@addFight');
     Route::post('/update', 'FightController@updateFight');
 });

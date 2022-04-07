@@ -34,7 +34,9 @@
     </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import FightResults from '../components/fightResults.vue'
+
 export default {
     name: 'dashboard',
     components: { 
@@ -46,7 +48,17 @@ export default {
     },
     computed: {
 
-    },  
+    },
+    methods : {
+        ...mapActions('oFight', ['addFight']),
+
+        /**
+         * openFight
+         */
+        openFight() {
+            this.addFight();
+        }
+    }  
 }
 </script>
 <style scoped>
