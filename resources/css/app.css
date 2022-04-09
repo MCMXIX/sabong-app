@@ -45,6 +45,12 @@
     h1 {
         @apply text-5xl font-bold;
     }
+    h2 {
+
+    }
+    h3 {
+        @apply text-4xl
+    }
 }
 
 @layer utilities { 
