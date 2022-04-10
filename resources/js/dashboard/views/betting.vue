@@ -142,6 +142,7 @@ export default {
                 this.errAmount = false;
             } else {
                 this.aBetDetails.iAmount = this.inputBetAmount;
+                this.errAmount = true;
                 this.checkSides();
             }
         },
