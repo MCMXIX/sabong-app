@@ -32,7 +32,8 @@ module.exports = {
                 /* blue */
                 "blue-high" : "#103CDA",
                 "blue-low" : "#21485F",
-                "blue-med" : "#2B5166"
+                "blue-med" : "#2B5166",
+                "blue-white": "#21668C"
             },
             fontFamily: {
                 "dmSans": ['DM-sans', 'sans-serif']

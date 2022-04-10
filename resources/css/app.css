@@ -45,6 +45,12 @@
     h1 {
         @apply text-5xl font-bold;
     }
+    h2 {
+
+    }
+    h3 {
+        @apply text-4xl
+    }
 }
 
 @layer utilities { 
@@ -89,6 +95,24 @@
     .button--robi {
         @apply bg-blue-low border-2 border-blue-high transition-colors rounded duration-200 ease-in-out focus:outline-blue-high focus:outline-none outline-1 focus:bg-blue-med hover:bg-blue-med uppercase;
     }
+    .meron--radio {
+        background: linear-gradient(180deg, #0CCC42 0%, #099932 100%);
+        box-shadow: inset 0px -4.55556px 4.55556px #09922F, inset 0px 4.55556px 4.55556px #0DD344; 
+        @apply w-full min-w-[135px] py-8 p-2 text-3xl text-center font-bold block select-none;
+    }
+    input[type="radio"]:checked + .meron--radio {
+        background: #7FCB94;
+        box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .wala--radio {
+        background: linear-gradient(180deg, #FF0025 0%, #D6001C 100%);
+        box-shadow: inset 0px -4.55556px 4.55556px #CC001A, inset 0px 4.55556px 4.55556px #FF0026;
+        @apply w-full min-w-[135px] py-8 p-2 text-3xl text-center font-bold block select-none;
+    }
+    input[type="radio"]:checked + .wala--radio {
+        background: #FF4863;
+        box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
 }
 
 html,
@@ -111,3 +135,15 @@ body {
     @apply absolute right-0 hover:brightness-150 cursor-pointer w-8 lg:w-0 h-8;
 }
 
+.fight__label,
+.fight-status {
+    @apply flex flex-col lg:justify-start items-center justify-between;
+}
+
+.total-bets {
+    @apply select-none font-bold text-yellow-300 text-4xl;
+}
+
+.winning-chance {
+    @apply text-gray-200 select-none;
+}

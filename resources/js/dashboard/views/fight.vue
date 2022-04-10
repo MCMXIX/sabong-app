@@ -104,31 +104,18 @@ export default {
 }
 </script>
 <style scoped>
-.fight__label,
-.fight-status {
-    @apply flex flex-col lg:justify-start justify-between;
-}
 .label--sides,
 .label {
     @apply text-center px-3;
 }
-.total-bets {
-    @apply text-4xl
-}
 .fight--sides__label .label {
     @apply text-2xl font-bold;
-}
-.winning-chance {
-    @apply text-gray-200;
 }
 .result__button--container button {
     @apply min-w-[8rem];
 }
 .fight-number {
     @apply p-4 bg-gray-med
-}
-.total-bets {
-    @apply font-bold text-yellow-300;
 }
 .side--text--results {
     @apply text-center;

@@ -22,6 +22,7 @@ $aRoutes = [
     'home'     => '/',
     'register' => '/register',
     'fight'    => '/fight',
+    'betting'  => '/betting'
     //ADD ROUTES HERE FROM VUE ROUTER
 ];
 
