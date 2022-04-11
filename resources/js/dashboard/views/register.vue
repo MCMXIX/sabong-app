@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="lg:h-[calc(100vh-96px)]">
         <div class="register__form text-center mx-auto">
             <div class="form__field__container flex flex-col gap-5">
                 <h1 class="mb-8">REGISTER</h1>

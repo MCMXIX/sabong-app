@@ -1,11 +1,11 @@
 <template>
-    <div class="fight w-4/5 mt-4 lg:mt-14 mx-auto container">
+    <div class="fight w-4/5 mx-auto container lg:h-[calc(100vh-96px)]">
         <div
-            class="fight__container--info bg-gray-dark shadow-lg rounded-lg p-2 lg:p-5 flex flex-col lg:flex-row justify-between">
+            class="fight__container--info mt-4 lg:mt-14 bg-gray-dark shadow-lg rounded-lg p-2 lg:p-5 flex flex-col lg:flex-row justify-between">
             <div class="order-3 lg:order-1 meron__container">
                 <p class="text--success label--sides mb-4 text-4xl">MERON</p>
                 <div class="side--text--results">
-                    <p class="total-bets">35,563</p>
+                    <p class="total-bets text-4xl">35,563</p>
                     <p class="winning-chance">187.16%</p>
                 </div>
             </div>
@@ -19,7 +19,7 @@
             <div class="order-2 lg:order-3  wala__container">
                 <p class="text--warn label--sides mb-4 text-4xl">WALA</p>
                 <div class="side--text--results ">
-                    <p class="total-bets">35</p>
+                    <p class="total-bets text-4xl">35</p>
                     <p class="winning-chance">192.16%</p>
                 </div>
             </div>
