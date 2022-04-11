@@ -1,5 +1,5 @@
 <template>
-    <div class="lg:max-w-[30%] mx-auto">
+    <div class="lg:max-w-[30%] mx-auto lg:h-[calc(100vh-96px)]">
         <div class=" order-1 flex flex-col lg:order-1 fight--info__container mt-4 mb-4 lg:mt-6 ">
             <div class="text-center order-1 lg:order-2 bg-gray-med max-w-max mx-auto p-5">
                 <p class="inline label text-center font-medium text-3xl">FIGHT #</p>

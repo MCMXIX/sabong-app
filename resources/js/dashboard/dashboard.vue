@@ -25,6 +25,6 @@ export default {
 <style scoped>
 .content__container {
     min-height: -webkit-fill-available;
-    @apply lg:h-screen flex flex-col max-w-[1280px] lg:bg-black-dark mx-auto lg:shadow-lg;
+    @apply lg:h-full flex flex-col max-w-[1280px] lg:bg-black-dark mx-auto lg:shadow-lg;
 }
 </style>
