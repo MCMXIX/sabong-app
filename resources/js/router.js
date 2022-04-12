@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './dashboard/views/home.vue'; 
 import Register from './dashboard/views/register.vue'; 
 import Fight from './dashboard/views/fight.vue';
+import Betting from './dashboard/views/betting.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -32,6 +33,11 @@ export default new Router({
             path : '/fight',
             name : 'fight',
             component : Fight
+        },
+        {
+            path : '/betting',
+            name : 'betting',
+            component : Betting
         },
     ]
 });

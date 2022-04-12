@@ -23,7 +23,9 @@ Route::get('/login', function () {
 $aRoutes = [
     'home'     => '/',
     'register' => '/register',
-    'fight'    => '/fight'
+    'fight'    => '/fight',
+    'betting'  => '/betting'
+    //ADD ROUTES HERE FROM VUE ROUTER
 ];
 
 foreach ($aRoutes as $sRouteName => $sVueRoute) {

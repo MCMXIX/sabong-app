@@ -1,7 +1,7 @@
 <template>
-    <div class="fight w-4/5 mt-4 lg:mt-14 mx-auto container">
+    <div class="fight w-4/5 mx-auto container lg:h-[calc(100vh-96px)]">
         <div
-            class="fight__container--info bg-gray-dark shadow-lg rounded-lg p-2 lg:p-5 flex flex-col lg:flex-row justify-between">
+            class="fight__container--info mt-4 lg:mt-14 bg-gray-dark shadow-lg rounded-lg p-2 lg:p-5 flex flex-col lg:flex-row justify-between">
             <div class="order-3 lg:order-1 meron__container">
                 <p class="text--success label--sides mb-4 text-4xl">MERON</p>
                 <div class="side--text--results">
@@ -166,31 +166,18 @@ export default {
 }
 </script>
 <style scoped>
-.fight__label,
-.fight-status {
-    @apply flex flex-col lg:justify-start justify-between;
-}
 .label--sides,
 .label {
     @apply text-center px-3;
 }
-.total-bets {
-    @apply text-4xl
-}
 .fight--sides__label .label {
     @apply text-2xl font-bold;
-}
-.winning-chance {
-    @apply text-gray-200;
 }
 .result__button--container button {
     @apply min-w-[8rem];
 }
 .fight-number {
     @apply p-4 bg-gray-med
-}
-.total-bets {
-    @apply font-bold text-yellow-300;
 }
 .side--text--results {
     @apply text-center;
