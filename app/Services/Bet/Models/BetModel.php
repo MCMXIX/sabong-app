@@ -2,7 +2,9 @@
 
 namespace App\Services\Bet\Models;
 
+use App\Services\Fight\Models\FightModel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * BetModel
@@ -32,6 +34,15 @@ class BetModel extends Model
         'side',
         'status'
     ];
+
+    /**
+     * fight
+     * @return BelongsTo
+     */
+    public function fight() : BelongsTo
+    {
+        return $this->belongsTo(FightModel::class);
+    }
 
     /**
      * addBet

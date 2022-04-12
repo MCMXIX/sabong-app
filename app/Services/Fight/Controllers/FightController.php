@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Fight\FightService;
 use App\Services\Fight\Requests\UpdateFightRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Arr;
 
 /**
  * FightController
@@ -30,23 +31,39 @@ class FightController extends Controller
     }
 
     /**
-     * addFight
-     * @return JsonResponse
-     */
-    public function addFight() : JsonResponse
-    {
-        $aResult = $this->oFightService->createFight();
-        return response()->json($aResult['data'], $aResult['code']);
-    }
-
-    /**
      * updateFight
      * @param UpdateFightRequest $oRequest
      * @return JsonResponse
      */
     public function updateFight(UpdateFightRequest $oRequest) : JsonResponse
     {
-        $aResult = $this->oFightService->updateFight($oRequest->validated());
+        $aParameters = $oRequest->validated();
+        if ($aParameters['fight_no'] === 1 && Arr::has($aParameters, 'game_winner') === false && Arr::has($aParameters, 'status') === false) {
+            $aResult = $this->oFightService->createCurrentFight();
+        } else {
+            $aResult = $this->oFightService->updateFight($aParameters);
+        }
+        
+        return response()->json($aResult['data'], $aResult['code']);
+    }
+
+    /**
+     * getFightInfo
+     * @return JsonResponse
+     */
+    public function getFightInfo() : JsonResponse
+    {
+        $aResult = $this->oFightService->getFightInfo();
+        return response()->json($aResult['data'], $aResult['code']);
+    }
+
+    /**
+     * getFightResults
+     * @return JsonResponse
+     */
+    public function getFightResults() : JsonResponse
+    {
+        $aResult = $this->oFightService->getFightResults();
         return response()->json($aResult['data'], $aResult['code']);
     }
 }

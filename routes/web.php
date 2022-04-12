@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\Bets;
+use App\Services\Fight\Models\FightModel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +49,8 @@ Route::namespace('App\Services\Bet\Controllers')->prefix('/api/bet')->group(func
 });
 
 Route::namespace('App\Services\Fight\Controllers')->prefix('/api/fight')->group(function () {
-    Route::post('/', 'FightController@addFight');
-    Route::post('/update', 'FightController@updateFight');
+    Route::get('/', 'FightController@getFightInfo');
+    Route::post('/', 'FightController@updateFight');
+    Route::get('/results', 'FightController@getFightResults');
 });
+/** END API ROUTES **/

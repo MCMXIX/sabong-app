@@ -2,7 +2,9 @@
 
 namespace App\Services\Fight\Models;
 
+use App\Services\Bet\Models\BetModel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * FightModel
@@ -30,6 +32,15 @@ class FightModel extends Model
         'status',
         'game_winner'
     ];
+
+    /**
+     * bets
+     * @return HasMany
+     */
+    public function bets() : HasMany
+    {
+        return $this->hasMany(BetModel::class, 'fight_no', 'fight_no');
+    }
 
     /**
      * getFightByNo
@@ -70,5 +81,24 @@ class FightModel extends Model
     public function updateFight(int $iFightNo, array $aParameters) : int
     {
         return $this->where('fight_no', $iFightNo)->update($aParameters);
+    }
+
+    /**
+     * getCurrentFight
+     * @return array
+     */
+    public function getCurrentFight() : array
+    {
+        $mFight = $this->with(['bets'])->orderBy('created_at', 'DESC')->get()->first();
+        return (($mFight === null) ? [] : $mFight->toArray());
+    }
+
+    /**
+     * getFightResult
+     * @return array
+     */
+    public function getFightResults() : array
+    {
+        return $this->select('fight_no', 'game_winner')->where('status', 'D')->get()->toArray();
     }
 }

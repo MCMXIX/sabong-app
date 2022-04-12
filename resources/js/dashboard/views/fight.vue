@@ -5,29 +5,29 @@
             <div class="order-3 lg:order-1 meron__container">
                 <p class="text--success label--sides mb-4 text-4xl">MERON</p>
                 <div class="side--text--results">
-                    <p class="total-bets">35,563</p>
+                    <p class="total-bets">{{ oFightInfo.meron_bets }}</p>
                     <p class="winning-chance">187.16%</p>
                 </div>
             </div>
             <div class=" order-1 flex flex-col lg:order-1 fight--info__container mb-4">
                 <div class="fight-number text-center order-1 lg:order-2">
                     <p class="inline label text-center font-medium text-3xl">FIGHT #</p>
-                    <p class="inline text-3xl font-medium">1</p>
+                    <p class="inline text-3xl font-medium"> {{ oFightInfo.fight_no }} </p>
                 </div>
-                <p class="text-green-med font-bold text-center text-3xl my-2 lg:mt-5 order-2 lg:order-2">OPEN</p>
+                <p :class="[sStatusclass, 'font-bold text-center text-3xl my-2 lg:mt-5 order-2 lg:order-2']">{{ sFightStatus }}</p>
             </div>
             <div class="order-2 lg:order-3  wala__container">
                 <p class="text--warn label--sides mb-4 text-4xl">WALA</p>
                 <div class="side--text--results ">
-                    <p class="total-bets">35</p>
+                    <p class="total-bets">{{ oFightInfo.wala_bets }}</p>
                     <p class="winning-chance">192.16%</p>
                 </div>
             </div>
         </div>
         <div class="fight__buttons flex flex-col lg:flex-row lg:gap-0 gap-2 justify-evenly mt-7">
-            <button class="button--primary">OPEN</button>
-            <button class="button--warn">CLOSE</button>
-            <button class="button--secondary" @click="doneFight();">DONE</button>
+            <button @click="updateFightResult('O')" class="button--primary">OPEN</button>
+            <button @click="updateFightResult('C')" class="button--warn">CLOSE</button>
+            <button @click="toggleFightResult()" class="button--secondary">DONE</button>
         </div>
         <div class="fight__container--results mt-7 w-4/5 mx-auto">
             <fight-results />
@@ -59,21 +59,21 @@
                     <div class="bg-black-dark px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div class="sm:flex sm:items-start">
                             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <button class="close__button" @click="doneFight()"> <span class="lg:icon ic-close"></span> </button>
+                                <button @click="toggleFightResult()" class="close__button"> <span class="lg:icon ic-close"></span> </button>
                                 <p class="text-4xl font-bold">RESULTS</p>
                             </div>
                         </div>
                     </div>
                     <div class="bg-black-dark px-4 py-3 sm:px-6 sm:flex flex-col w-full">
                         <div class="result__button--container flex justify-evenly gap-4 w-full">
-                            <button class="button--primary py-2 text-3xl">MERON</button>
-                            <button class="button--warn  text-3xl">WALA</button>
+                            <button @click="updateFightResult('D', 'M')" class="button--primary py-2 text-3xl">MERON</button>
+                            <button @click="updateFightResult('D', 'W')" class="button--warn  text-3xl">WALA</button>
                         </div>
                         <div class="result__button--container flex mt-8 justify-evenly w-full">
-                            <button class="button--robi py-2  text-3xl">DRAW</button>
+                            <button @click="updateFightResult('D', 'D')" class="button--robi py-2  text-3xl">DRAW</button>
                         </div>
                         <div class="result__button--container flex mt-8 justify-evenly w-full">
-                            <button class="button--secondary py-2">Cancel <br/> Fight</button>
+                            <button @click="updateFightResult('D', 'E')" class="button--secondary py-2">Cancel <br/> Fight</button>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,9 @@
     </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import FightResults from '../components/fightResults.vue'
+
 export default {
     name: 'dashboard',
     components: { 
@@ -91,16 +93,76 @@ export default {
     data() {
         return {
             fightDone: true,
+            iFightNo : 1,
         }
+    },
+    mounted() {
+        this.getFightInfo();
+        
+        //WEBSOCKET FOR FIGHT INFO
+        window.Echo.channel('bets')
+            .listen('Bets', (oFightInfo)=> {
+                this.$store.commit('oFight/SET_FIGHT_INFO', oFightInfo);
+            });
     },
     computed: {
+        ...mapGetters('oFight', ['oFightInfo']),
 
-    },
-    methods: {
-            doneFight : function() {
-            this.fightDone = !this.fightDone;
+        /**
+         * sFightStatus
+         * @return string
+         */
+        sFightStatus() {
+            if (!!this.oFightInfo.status === false) {
+                return '---';
+            }
+
+            if (this.oFightInfo.status === 'C') {
+                return 'CLOSED';
+            }
+
+            return 'OPEN';
+        },
+
+        /**
+         * sStatusclass
+         * @return string
+         */
+        sStatusclass() {
+            return ((this.oFightInfo.status === 'O') ? 'text-green-med' : 'text-gray-med');
         }
     },
+    methods : {
+        ...mapActions('oFight', ['updateFight', 'getFightInfo']),
+
+        /**
+         * toggleFightResult
+         */
+        toggleFightResult() {
+            this.fightDone = !this.fightDone;
+        },
+
+        /**
+         * updateFightResult
+         */
+        updateFightResult(sStatus, mGameWinner = null) {
+            let oParameters = {
+                fight_no : this.oFightInfo.fight_no,
+                status : sStatus
+            };
+
+            if (mGameWinner !== null) {
+                oParameters['game_winner'] = mGameWinner
+            }
+
+            if (this.oFightInfo.fight_no === 1 && !!this.oFightInfo.status === false) {
+                delete oParameters.status;
+            }
+
+            this.updateFight(oParameters);
+            this.fightDone = true;
+        }
+    }  
 }
 </script>
 <style scoped>
