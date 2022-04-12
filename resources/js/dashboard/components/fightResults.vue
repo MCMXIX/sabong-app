@@ -18,47 +18,81 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="results--meron--winner">
-                        <td class="fight--number">#1</td>
-                        <td class="side--results">MERON</td>
-                    </tr>
-                    <tr class="results--meron--winner">
-                        <td class="fight--number">#2</td>
-                        <td class="side--results">MERON</td>
-                    </tr>
-                    <tr class="results--wala--winner">
-                        <td class="fight--number">#3</td>
-                        <td class="side--results">WALA</td>
-                    </tr>
-                    <tr class="results--meron--winner">
-                        <td class="fight--number">#4</td>
-                        <td class="side--results">MERON</td>
-                    </tr>
-                    <tr class="results--draw--winner">
-                        <td class="fight--number">#5</td>
-                        <td class="side--results">Draw</td>
-                    </tr>
-                    <tr class="results--draw--winner">
-                        <td class="fight--number">#6</td>
-                        <td class="side--results">Draw</td>
-                    </tr>
-                    <tr class="results--wala--winner">
-                        <td class="fight--number">#7</td>
-                        <td class="side--results">WALA</td>
+                    <tr v-for="(oFightResult, iIndex) in this.aSetFightResult" :key="iIndex" :class="getFightResultClass(oFightResult.game_winner)">
+                        <td class="fight--number">#{{ oFightResult.fight_no }}</td>
+                        <td class="side--results">{{ oFightResult.game_winner }}</td>
                     </tr>
                 </tbody>
-                
             </table>
         </div>
     </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
     name: 'fightResults',
     data() {
         return {
         }
     },
+    mounted() {
+        this.getFightResults();
+
+        //WEBSOCKET FOR FIGHT RESULTS
+        window.Echo.channel('fightResults')
+            .listen('FightResults', (aFightResults)=> {
+                this.$store.commit('oFight/SET_FIGHT_RESULTS', aFightResults);
+            });
+    },
+    computed : {
+        ...mapGetters('oFight', ['aFightResults']),
+        
+        /**
+         * aSetFightResult
+         * @return array
+         */
+        aSetFightResult() {     
+            let aFights = this.aFightResults;
+            for (const iKey in aFights) {     
+                switch(aFights[iKey].game_winner) {
+                    case 'M':
+                        aFights[iKey].game_winner = 'MERON';
+                        break;
+                    case 'W':
+                        aFights[iKey].game_winner = 'WALA';
+                        break;
+                    case 'D':
+                        aFights[iKey].game_winner = 'DRAW';
+                        break;
+                    default:
+                        aFights[iKey].game_winner = 'CANCELLED';
+                        break;
+                }
+            }
+
+            return aFights;
+        }
+    },
+    methods : {
+        ...mapActions('oFight', ['getFightResults']),
+
+        /**
+         * getFightResultClass
+         * @param {string} sFightResult
+         * @return string
+         */
+        getFightResultClass(sFightResult) {
+            switch (sFightResult) {
+                case 'MERON':
+                    return 'results--meron--winner';
+                case 'WALA':
+                    return 'results--wala--winner';
+                default:
+                    return 'results--draw--winner';
+            }
+        }
+    }
 }
 </script>
 <style scoped>
