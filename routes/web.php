@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\Bets;
+use App\Services\Fight\Models\FightModel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//VUE ROUTES
+/** VUE ROUTES **/
 Route::get('/login', function () {
     return view('login');
-})->name('login');
+})->middleware(['userLoginCheck'])->name('login');
 
 $aRoutes = [
     'home'     => '/',
@@ -29,5 +31,28 @@ $aRoutes = [
 foreach ($aRoutes as $sRouteName => $sVueRoute) {
     Route::get($sVueRoute, function () {
         return view('dashboard');
-    })->name($sRouteName);
+    })->middleware(['userAuth'])->name($sRouteName);
 }
+/** -- END VUE ROUTES -- **/
+
+/** API ROUTES **/
+// TODO: UPDATE CSRF TOKEN UNDER App\Http\Middleware/VerifyCsrfToken.php
+Route::namespace('App\Services\User\Controllers')->prefix('/api/user')->group(function () {
+    Route::post('/login', 'UserController@login')->middleware(['userLoginCheck']);
+    Route::middleware(['userAuth'])->group(function() {
+        Route::post('/register', 'UserController@createUser');
+        Route::get('/logout', 'UserController@logout');
+    });
+});
+
+//BET API ROUTES
+Route::namespace('App\Services\Bet\Controllers')->prefix('/api/bet')->group(function () {
+    Route::post('/', 'BetController@addBet');
+});
+
+Route::namespace('App\Services\Fight\Controllers')->prefix('/api/fight')->group(function () {
+    Route::get('/', 'FightController@getFightInfo');
+    Route::post('/', 'FightController@updateFight');
+    Route::get('/results', 'FightController@getFightResults');
+});
+/** END API ROUTES **/

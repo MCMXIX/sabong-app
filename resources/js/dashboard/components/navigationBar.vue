@@ -9,10 +9,10 @@
         </div>
         <div class="navbar__container overflow-hidden" :class="{'active' : drawerActive}">
             <div class="navbar--links">
-                <a class="nav-links" href="">HOME</a>
-                <a class="nav-links" href="">Dashboard</a>
-                <a class="nav-links" href="">Place Bet</a>
-                <a class="nav-links" href="">Scan</a>
+                <router-link :to="'#'" class="nav-links" href="">HOME</router-link>
+                <router-link :to="'/fight'" class="nav-links" href="">Dashboard</router-link>
+                <router-link :to="'#'" class="nav-links" href="">Place Bet</router-link>
+                <router-link :to="'#'" class="nav-links" href="">Scan</router-link>
             </div>
             <div class="navbar--logo 2xl:pl-24 relative">
                 <img class="w-1/2 lg:w-auto lg:h-20" src="/img/cockfight-logo.png" alt="">
@@ -21,8 +21,8 @@
                 </div>
             </div>
             <div class="navbar--user">
-                <router-link href="/register"  :to="'#'" class="navbar--register nav-links block">register</router-link>
-                <a href="" class="navbar--logout blocked w-full">logout <span class="icon ic-logout"></span></a>
+                <router-link :to="'/register'" class="navbar--register nav-links block">register</router-link>
+                <a href="/api/user/logout" class="navbar--logout blocked w-full">logout <span class="icon ic-logout"></span></a>
             </div>
             <button class="close__button" @click="showDrawer()"> <span class="lg:icon ic-close"></span> </button>
         </div>
@@ -41,10 +41,10 @@ export default {
 
     },
     methods: {
-            showDrawer : function() {
+        showDrawer : function() {
             this.drawerActive = !this.drawerActive;
         }
-    },
+    }
 }
 </script>
 <style scoped>
