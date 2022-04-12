@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed h-full lg:relative" :class="{'w-full' :drawerActive}">
+    <div class="fixed z-50 h-full lg:relative" :class="{'w-full' :drawerActive}">
         <div class="drawer lg:hidden">
             <button class="drawer__button" @click="showDrawer()">
                 <div class="menu-icon"></div>
@@ -9,7 +9,7 @@
         </div>
         <div class="navbar__container overflow-hidden" :class="{'active' : drawerActive}">
             <div class="navbar--links">
-                <router-link :to="'#'" class="nav-links" href="">HOME</router-link :to="'#'">
+                <router-link :to="'#'" class="nav-links" href="">HOME</router-link>
                 <router-link :to="'/fight'" class="nav-links" href="">Dashboard</router-link>
                 <router-link :to="'#'" class="nav-links" href="">Place Bet</router-link>
                 <router-link :to="'#'" class="nav-links" href="">Scan</router-link>
@@ -17,7 +17,6 @@
             <div class="navbar--logo 2xl:pl-24 relative">
                 <img class="w-1/2 lg:w-auto lg:h-20" src="/img/cockfight-logo.png" alt="">
                 <div class="logo--text absolute bottom-5 w-max lg:bottom-3">
-                    <p class=" italic text-3xl leading-tight">KLS</p>
                     <p class="">Sabong App</p>
                 </div>
             </div>
@@ -80,9 +79,6 @@ export default {
 .navbar--logout {
     @apply drop-shadow-lg border-t-2 py-3 pl-4 lg:p-0 lg:pl-0 w-full lg:w-auto text-left uppercase lg:border-t-0 shrink-0 hover:brightness-75;
 }
-.close__button {
-    @apply absolute right-0 hover:brightness-150 cursor-pointer w-8 lg:w-0 h-8;
-}
 .ic-logout {
     background: url('/img/ic-logout.svg') no-repeat center;
     background-size: contain;
@@ -92,6 +88,12 @@ export default {
 }
 .drawer__button {
     @apply h-max ml-2 mt-5;
+}
+.ic-close::before,
+.ic-close::after {
+    top: 10px;
+    right: 20px;
+    @apply lg:hidden
 }
 .menu-icon {
     @apply w-8 h-1 bg-white mb-2 transition-all duration-100 ease-in-out;

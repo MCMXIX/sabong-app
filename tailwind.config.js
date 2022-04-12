@@ -29,6 +29,10 @@ module.exports = {
                 "black-med": "#292C28",
                 "black-low": "#272A26",
                 "black-dark": "#262825",
+                /* blue */
+                "blue-high" : "#103CDA",
+                "blue-low" : "#21485F",
+                "blue-med" : "#2B5166"
             },
             fontFamily: {
                 "dmSans": ['DM-sans', 'sans-serif']

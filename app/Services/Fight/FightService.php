@@ -2,6 +2,8 @@
 
 namespace App\Services\Fight;
 
+use App\Events\Bets;
+use App\Events\FightResults;
 use App\Services\Fight\Models\FightModel;
 use Illuminate\Support\Arr;
 
@@ -14,7 +16,7 @@ use Illuminate\Support\Arr;
 class FightService
 {
     /**
-     * 
+     * @var FightModel
      */
     private $oFightModel;
 
@@ -38,27 +40,27 @@ class FightService
     }
 
     /**
-     * createFight
+     * createCurrentFight
      * @return array
      */
-    public function createFight() : array
+    public function createCurrentFight() : array
     {
-        if (empty($this->oFightModel->getOpenFights()) === false) {
-            return [
-                'code' => 400,
-                'data' => [
-                    'message' => 'There is fight still on going. Please mark the current fight done to proceed'
-                ]
-            ];
+        $bResult = $this->createFight([
+            'user_id' => session('user_id'),
+            'status'  => 'O'
+        ]);
+
+        if ($bResult === true) {
+            $aFightInfo = $this->getFightInfo();
+            //TODO: CHECK IF THIS IS NECCESSARY
+            broadcast(new Bets());
+            return $aFightInfo;
         }
 
-        $aFight = $this->oFightModel->createFight(['user_id' => session('user_id')]);
-        //TODO : WEBSOCKET
-
         return [
-            'code' => 200,
+            'code' => 400,
             'data' => [
-                'message' => 'Created successfully.'
+                'message' => 'There is fight still on going. Please mark the current fight done to proceed'
             ]
         ];
     }
@@ -70,23 +72,95 @@ class FightService
      */
     public function updateFight(array $aParameters) : array
     {
-        $iFightNo = Arr::pull($aParameters, 'fight_no');
-        if ((int)$this->oFightModel->updateFight($iFightNo, $aParameters) < 1) {
+        $aParameters['user_id'] = session('user_id');
+        $iFightNo = (int)Arr::pull($aParameters, 'fight_no');
+        if ($this->oFightModel->updateFight($iFightNo, $aParameters) < 1) {
             return [
                 'code' => 404,
                 'data' => [
                     'message' => 'Fight doesn\'t exist!'
                 ]
             ];
+        }   
+        
+        if (Arr::has($aParameters, 'game_winner') === true) {
+            if ($this->createFight(['user_id' => $aParameters['user_id']]) === false) {
+                return [
+                    'code' => 400,
+                    'data' => [
+                        'message' => 'There is fight still on going. Please mark the current fight done to proceed'
+                    ]
+                ];
+            }
+        }
+
+        $aFightInfo = $this->getFightInfo();
+        //TODO : CHECK IF THIS IS NECCESSARY
+        broadcast(new Bets());
+    
+        return $aFightInfo;
+    }
+
+    /**
+     * createFight
+     * @param array $aParameters
+     * @return bool
+     */
+    private function createFight(array $aParameters) : bool
+    {
+        if (empty($this->oFightModel->getOpenFights()) === false) {
+            return false;
         }
         
-        //TODO : WEBSOCKET
+        $this->oFightModel->createFight($aParameters);
+        broadcast(new FightResults());
 
+        return true;
+    }
+
+    /**
+     * getFightInfo
+     * @return array
+     */
+    public function getFightInfo() : array
+    {
+        $aFightInfo = $this->oFightModel->getCurrentFight();
+    
         return [
             'code' => 200,
             'data' => [
-                'message' => 'Updated successfully.'
+                'fight_no'   => Arr::get($aFightInfo, 'fight_no', 1),
+                'status'     => Arr::get($aFightInfo, 'status', ''),
+                'wala_bets'  => $this->getSideTotalBet($aFightInfo, 'W'),
+                'meron_bets' => $this->getSideTotalBet($aFightInfo, 'M')
             ]
+        ];
+    }
+
+    /**
+     * getSideTotalBet
+     * @param array $aFightInfo
+     * @param string $sSide
+     * @return int
+     */
+    private function getSideTotalBet(array $aFightInfo, string $sSide) :int
+    {
+        $aBets = Arr::where(Arr::get($aFightInfo, 'bets', []), function($aBet) use($sSide) {
+            return $aBet['side'] === $sSide;
+        });
+
+        return array_sum(array_column($aBets, 'amount'));
+    }
+
+    /**
+     * getFightResults
+     * @return array
+     */
+    public function getFightResults() : array
+    {
+        return [
+            'code' => 200,
+            'data' => $this->oFightModel->getFightResults()
         ];
     }
 }

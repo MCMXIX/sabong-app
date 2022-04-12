@@ -31,8 +31,8 @@ class UpdateFightRequest extends FormRequest
     {
         return [
             'fight_no'    => 'required|integer',
-            'status'      => 'required|in:O,C,D',
-            'game_winner' => 'sometimes|required|in:W,M,D'
+            'status'      => 'sometimes|required|in:O,C,D',
+            'game_winner' => 'sometimes|required|in:W,M,D,E'
         ];
     }
 }

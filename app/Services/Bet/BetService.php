@@ -2,6 +2,7 @@
 
 namespace App\Services\Bet;
 
+use App\Events\Bets;
 use App\Services\Bet\Models\BetModel;
 use App\Services\Fight\FightService;
 use App\Services\User\UserService;
@@ -75,8 +76,8 @@ class BetService
         
         $aParameter['status'] = 'F';
         $aParameter['user_id'] = session('user_id');
-        $aBet = $this->oBetModel->addBet($aParameter);
-        //TODO : WebSocket Update Data from vuex
+        $this->oBetModel->addBet($aParameter);
+        broadcast(new Bets());
 
         return [
             'code' => 200,
