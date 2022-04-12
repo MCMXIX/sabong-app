@@ -39,7 +39,7 @@ foreach ($aRoutes as $sRouteName => $sVueRoute) {
 // TODO: UPDATE CSRF TOKEN UNDER App\Http\Middleware/VerifyCsrfToken.php
 Route::namespace('App\Services\User\Controllers')->prefix('/api/user')->group(function () {
     Route::post('/login', 'UserController@login')->middleware(['userLoginCheck']);
-    Route::middleware(['userAuth'])->group(function() {
+    Route::middleware(['userAuth'])->group(function () {
         Route::post('/register', 'UserController@createUser');
         Route::get('/logout', 'UserController@logout');
     });
