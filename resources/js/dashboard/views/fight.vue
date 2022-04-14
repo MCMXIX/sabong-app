@@ -5,7 +5,7 @@
             <div class="order-3 lg:order-1 meron__container">
                 <p class="text--success label--sides mb-4 text-4xl">MERON</p>
                 <div class="side--text--results">
-                    <p class="total-bets">{{ oFightInfo.meron_bets }}</p>
+                    <p class="total-bets text-3xl lg:text-4xl">{{ oFightInfo.meron_bets.toLocaleString() }}</p>
                     <p class="winning-chance">187.16%</p>
                 </div>
             </div>
@@ -19,7 +19,7 @@
             <div class="order-2 lg:order-3  wala__container">
                 <p class="text--warn label--sides mb-4 text-4xl">WALA</p>
                 <div class="side--text--results ">
-                    <p class="total-bets">{{ oFightInfo.wala_bets }}</p>
+                    <p class="total-bets text-3xl lg:text-4xl">{{ oFightInfo.wala_bets > 999 }}</p>
                     <p class="winning-chance">192.16%</p>
                 </div>
             </div>
@@ -161,7 +161,7 @@ export default {
 
             this.updateFight(oParameters);
             this.fightDone = true;
-        }
+        },
     }  
 }
 </script>
