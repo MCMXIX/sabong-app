@@ -5,7 +5,7 @@
             <div class="order-3 lg:order-1 meron__container">
                 <p class="text--success label--sides mb-4 text-4xl">MERON</p>
                 <div class="side--text--results">
-                    <p class="total-bets text-3xl lg:text-4xl">{{ oFightInfo.meron_bets.toLocaleString() }}</p>
+                    <p class="total-bets">{{ getFormattedTotalBet(oFightInfo.meron_bets) }}</p>
                     <p class="winning-chance">187.16%</p>
                 </div>
             </div>
@@ -14,12 +14,12 @@
                     <p class="inline label text-center font-medium text-3xl">FIGHT #</p>
                     <p class="inline text-3xl font-medium"> {{ oFightInfo.fight_no }} </p>
                 </div>
-                <p :class="[sStatusclass, 'font-bold text-center text-3xl my-2 lg:mt-5 order-2 lg:order-2']">{{ sFightStatus }}</p>
+                <p :class="[getStatusTextColor(oFightInfo.status), 'font-bold text-center text-3xl my-2 lg:mt-5 order-2 lg:order-2']">{{ getFightStatus(oFightInfo.status) }}</p>
             </div>
             <div class="order-2 lg:order-3  wala__container">
                 <p class="text--warn label--sides mb-4 text-4xl">WALA</p>
                 <div class="side--text--results ">
-                    <p class="total-bets text-3xl lg:text-4xl">{{ oFightInfo.wala_bets > 999 }}</p>
+                    <p class="total-bets">{{ getFormattedTotalBet(oFightInfo.wala_bets) }}</p>
                     <p class="winning-chance">192.16%</p>
                 </div>
             </div>
@@ -83,6 +83,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import {fightMixin} from '../../mixins/fight-mixin';
 import FightResults from '../components/fightResults.vue'
 
 export default {
@@ -90,6 +91,7 @@ export default {
     components: { 
         FightResults,
     },
+    mixins: [fightMixin],
     data() {
         return {
             fightDone: true,
@@ -106,31 +108,7 @@ export default {
             });
     },
     computed: {
-        ...mapGetters('oFight', ['oFightInfo']),
-
-        /**
-         * sFightStatus
-         * @return string
-         */
-        sFightStatus() {
-            if (!!this.oFightInfo.status === false) {
-                return '---';
-            }
-
-            if (this.oFightInfo.status === 'C') {
-                return 'CLOSED';
-            }
-
-            return 'OPEN';
-        },
-
-        /**
-         * sStatusclass
-         * @return string
-         */
-        sStatusclass() {
-            return ((this.oFightInfo.status === 'O') ? 'text-green-med' : 'text-gray-med');
-        }
+        ...mapGetters('oFight', ['oFightInfo'])
     },
     methods : {
         ...mapActions('oFight', ['updateFight', 'getFightInfo']),

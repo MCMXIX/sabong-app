@@ -77,7 +77,8 @@ class BetService
         $aParameter['status'] = 'F';
         $aParameter['user_id'] = session('user_id');
         $this->oBetModel->addBet($aParameter);
-        broadcast(new Bets());
+
+        broadcast(new Bets($this->oFightService->getFightInfo()['data']));
 
         return [
             'code' => 200,
