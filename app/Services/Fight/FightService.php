@@ -52,8 +52,7 @@ class FightService
 
         if ($bResult === true) {
             $aFightInfo = $this->getFightInfo();
-            //TODO: CHECK IF THIS IS NECCESSARY
-            broadcast(new Bets());
+            broadcast(new Bets($aFightInfo['data']));
             return $aFightInfo;
         }
 
@@ -95,8 +94,7 @@ class FightService
         }
 
         $aFightInfo = $this->getFightInfo();
-        //TODO : CHECK IF THIS IS NECCESSARY
-        broadcast(new Bets());
+        broadcast(new Bets($aFightInfo['data']));
     
         return $aFightInfo;
     }
