@@ -9,10 +9,10 @@
         </div>
         <div class="navbar__container overflow-hidden" :class="{'active' : drawerActive}">
             <div class="navbar--links">
-                <router-link :to="'#'" class="nav-links" href="">HOME</router-link>
-                <router-link :to="'/fight'" class="nav-links" href="">Dashboard</router-link>
-                <router-link :to="'#'" class="nav-links" href="">Place Bet</router-link>
-                <router-link :to="'#'" class="nav-links" href="">Scan</router-link>
+                <button @click="redirectPage('/')" class="nav-links" href="">HOME</button>
+                <button @click="redirectPage('/fight')" class="nav-links" href="">DASHBOARD</button>
+                <button @click="redirectPage('/betting')" class="nav-links" href="">PLACE BET</button>
+                <button @click="redirectPage('/')" class="nav-links" href="">SCAN</button>
             </div>
             <div class="navbar--logo 2xl:pl-24 relative">
                 <img class="w-1/2 lg:w-auto lg:h-20" src="/img/cockfight-logo.png" alt="">
@@ -37,12 +37,23 @@ export default {
             drawerActive : false,
         }
     },
-    computed: {
-
-    },
     methods: {
+        /**
+         * showDrawer
+         */
         showDrawer : function() {
             this.drawerActive = !this.drawerActive;
+        },
+
+        /**
+         * redirectPage
+         * @param string sRoute
+         */
+        redirectPage : function(sRoute) {
+            if (this.$route.fullPath !== sRoute) {
+                this.$router.push(sRoute);
+                this.showDrawer();
+            }
         }
     }
 }

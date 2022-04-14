@@ -32,7 +32,9 @@ export default {
             .listen('FightResults', (aFightResults)=> {
                 this.$store.commit('oFight/SET_FIGHT_RESULTS', aFightResults);
             });
-            
+    },
+    updated() {
+        this.scrollDown();
     },
     computed : {
         ...mapGetters('oFight', ['aFightResults']),
@@ -59,6 +61,7 @@ export default {
                     break;
                 }
             }
+
             return aFights;
         },
         
@@ -72,7 +75,7 @@ export default {
          * @return string
          */
         getFightResultClass(sFightResult) {
-            this.goDown();
+            this.scrollDown();
             switch (sFightResult) {
                 case 'MERON' :
                     return 'results--meron--winner';
@@ -82,13 +85,14 @@ export default {
                     return 'results--draw--winner';
             }
         },
-        goDown() {
-            var container = this.$el.querySelector("#table-container");
-            container.scrollTop = container.scrollHeight;
+
+        scrollDown() {
+            var container = document.querySelector("#table-container");
+            if (!!container === true) {
+                container.scrollTop = container.scrollHeight;
+            }
         }
         
-    }, updated() {
-        this.goDown();
     }
 }
 </script>

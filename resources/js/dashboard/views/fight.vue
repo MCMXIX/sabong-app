@@ -29,7 +29,7 @@
             <button @click="updateFightResult('C')" class="button--warn">CLOSE</button>
             <button @click="toggleFightResult()" class="button--secondary">DONE</button>
         </div>
-        <div class="fight__container--results mt-7 w-4/5 mx-auto">
+        <div class="fight__container--results mt-7 w-4/5 mx-auto mb-5">
             <fight-results />
         </div>
         <div class="fixed z-[60] inset-0 overflow-y-auto" :class="{'hidden' : fightDone}" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -149,7 +149,7 @@ export default {
     @apply text-center px-3;
 }
 .fight--sides__label .label {
-    @apply text-2xl font-bold;
+    @apply text-4xl font-bold;
 }
 .result__button--container button {
     @apply min-w-[8rem];
