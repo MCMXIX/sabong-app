@@ -57,10 +57,13 @@ export default {
                 oElement.target.classList.add('font-bold');
             }
         },
+        
+        /**
+         * removeSelectedClass
+         */
         removeSelectedClass: function() {
             let oNavButtons = this.$el.querySelectorAll('.nav-links');
             oNavButtons.forEach((oElement) => {
-                
                 oElement.classList.remove('font-bold');
             })
         }
