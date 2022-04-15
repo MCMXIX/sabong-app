@@ -52,9 +52,9 @@ export default {
         redirectPage : function(sRoute, oElement) {
             if (this.$route.fullPath !== sRoute) {
                 this.removeSelectedClass();
+                oElement.target.classList.add('font-bold');
                 this.$router.push(sRoute);
                 this.showDrawer();
-                oElement.target.classList.add('font-bold');
             }
         },
         

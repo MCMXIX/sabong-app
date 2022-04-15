@@ -9,7 +9,7 @@
             </thead>
         </table>
         <div class="results table-fixed w-full" id="table-container" style="max-height:210px;">
-            <div class="fight--row__container" v-for="(oFightResult, iIndex) in this.aSetFightResult" :key="iIndex" :class="getFightResultClass(oFightResult.game_winner)">
+            <div v-for="(oFightResult, iIndex) in aSetFightResult" :key="iIndex" :class="[getFightResultClass(oFightResult.game_winner), 'fight--row__container']">
                 <p class="fight-number__text">#{{ oFightResult.fight_no }}</p>
                 <p class="side-result__text">{{ oFightResult.game_winner }}</p>
             </div>
@@ -27,6 +27,7 @@ export default {
     },
     mounted() {
         this.getFightResults();
+
         //WEBSOCKET FOR FIGHT RESULTS
         window.Echo.channel('fightResults')
             .listen('FightResults', (aFightResults)=> {
@@ -75,7 +76,6 @@ export default {
          * @return string
          */
         getFightResultClass(sFightResult) {
-            this.scrollDown();
             switch (sFightResult) {
                 case 'MERON' :
                     return 'results--meron--winner';

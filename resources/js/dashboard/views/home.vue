@@ -3,10 +3,10 @@
         <div class="game--status--left  pt-4">
             <div class="text-center shadow-lg bg-gray-med md:w-1/4 py-5 mx-auto">
                 <p class="inline label text-center font-medium text-4xl">FIGHT #</p>
-                <p class="inline text-4xl font-medium">1</p>
+                <p class="inline text-4xl font-medium">{{ oFightInfo.fight_no }}</p>
             </div>
             <div class="status--betting w-full mt-4">
-                <h1 class="text-center text-green-med">OPEN</h1>
+                <h1 :class="[getStatusTextColor(oFightInfo.status), 'text-center']">{{ getFightStatus(oFightInfo.status) }}</h1>
             </div>
             <div class="bet--status w-full mt-24">
                 <div class="bet--status--sides flex">
@@ -16,11 +16,11 @@
                 <div class="bet--status--stake">
                     <div class="side--text--results flex text-center mt-8">
                         <div class="meron--stake--result w-full">
-                            <p class="total-bets text-3xl lg:text-8xl">35,563</p>
+                            <p class="total-bets text-3xl lg:text-8xl">{{ getFormattedTotalBet(oFightInfo.meron_bets) }}</p>
                             <p class="winning-chance text-4xl">192.16%</p>
                         </div>
                         <div class="meron--stake--result w-full">
-                            <p class="total-bets text-3xl lg:text-8xl">35</p>
+                            <p class="total-bets text-3xl lg:text-8xl">{{ getFormattedTotalBet(oFightInfo.wala_bets) }}</p>
                             <p class="winning-chance text-4xl">187.16%</p>
                         </div>
                     </div>
@@ -35,23 +35,34 @@
 
 <script>
 import FightResults from '../components/fightResults.vue'
+import { mapActions, mapGetters } from 'vuex';
+import { fightMixin } from '../../mixins/fight-mixin';
+
 export default {
     name: 'home',
     components: { 
         FightResults,
     },
+    mixins: [fightMixin],
     data() {
         return {
             fightDone: true,
         }
     },
-    computed: {
+    mounted() {
+        this.getFightInfo();
 
+        //WEBSOCKET FOR FIGHT INFO
+        window.Echo.channel('bets')
+            .listen('Bets', (oFightInfo)=> {
+                this.$store.commit('oFight/SET_FIGHT_INFO', oFightInfo);
+            });
+    },
+    computed: {
+        ...mapGetters('oFight', ['oFightInfo'])
     },
     methods: {
-            doneFight : function() {
-            this.fightDone = !this.fightDone;
-        }
+        ...mapActions('oFight', ['getFightInfo'])
     },
 }
 </script>
