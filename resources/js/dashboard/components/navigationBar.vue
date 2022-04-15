@@ -9,10 +9,10 @@
         </div>
         <div class="navbar__container overflow-hidden" :class="{'active' : drawerActive}">
             <div class="navbar--links">
-                <router-link :to="'#'" class="nav-links" href="">HOME</router-link>
-                <router-link :to="'/fight'" class="nav-links" href="">Dashboard</router-link>
-                <router-link :to="'#'" class="nav-links" href="">Place Bet</router-link>
-                <router-link :to="'#'" class="nav-links" href="">Scan</router-link>
+                <button @click="redirectPage('/', $event)" class="nav-links" >HOME</button>
+                <button @click="redirectPage('/fight', $event)" class="nav-links" >DASHBOARD</button>
+                <button @click="redirectPage('/betting', $event)" class="nav-links" >PLACE BET</button>
+                <button @click="redirectPage('/', $event)" class="nav-links" >SCAN</button>
             </div>
             <div class="navbar--logo 2xl:pl-24 relative">
                 <img class="w-1/2 lg:w-auto lg:h-20" src="/img/cockfight-logo.png" alt="">
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="navbar--user">
-                <router-link :to="'/register'" class="navbar--register nav-links block">register</router-link>
+                <button @click="redirectPage('/register', $event)" class="navbar--register nav-links block">register</button>
                 <a href="/api/user/logout" class="navbar--logout blocked w-full">logout <span class="icon ic-logout"></span></a>
             </div>
             <button class="close__button" @click="showDrawer()"> <span class="lg:icon ic-close"></span> </button>
@@ -37,12 +37,35 @@ export default {
             drawerActive : false,
         }
     },
-    computed: {
-
-    },
     methods: {
+        /**
+         * showDrawer
+         */
         showDrawer : function() {
             this.drawerActive = !this.drawerActive;
+        },
+
+        /**
+         * redirectPage
+         * @param string sRoute
+         */
+        redirectPage : function(sRoute, oElement) {
+            if (this.$route.fullPath !== sRoute) {
+                this.removeSelectedClass();
+                this.$router.push(sRoute);
+                this.showDrawer();
+                oElement.target.classList.add('font-bold');
+            }
+        },
+        
+        /**
+         * removeSelectedClass
+         */
+        removeSelectedClass: function() {
+            let oNavButtons = this.$el.querySelectorAll('.nav-links');
+            oNavButtons.forEach((oElement) => {
+                oElement.classList.remove('font-bold');
+            })
         }
     }
 }
@@ -61,7 +84,7 @@ export default {
     @apply lg:order-1 order-2;
 }
 .navbar--links .nav-links {
-    @apply lg:mr-4 relative flex lg:inline lg:flex-row py-2 pl-4 lg:pl-0 lg:border-0 border-b-2 border-gray-high hover:bg-black-low;
+    @apply lg:mr-4 relative flex w-full lg:w-auto lg:inline lg:flex-row py-2 pl-4 lg:pl-0 lg:border-0 border-b-2 border-gray-high hover:bg-black-low;
 }
 .navbar--links .nav-links::after {
     content: '';

@@ -20,11 +20,11 @@
         </div>
         <div class="betting__container--counter meron">
             <div class="fight-status w-1/2 text-center">
-                <p class="total-bets number">{{ getFormattedTotalBet(oFightInfo.meron_bets) }}</p>
+                <p class="total-bets number mt-4">{{ getFormattedTotalBet(oFightInfo.meron_bets) }}</p>
                 <p class="winning-chance number">197.6%</p>
             </div>
             <div class="fight-status w-1/2 text-center">
-                <p class="total-bets number">{{ getFormattedTotalBet(oFightInfo.wala_bets) }}</p>
+                <p class="total-bets number mt-4">{{ getFormattedTotalBet(oFightInfo.wala_bets) }}</p>
                 <p class="winning-chance number">182.6%</p>
             </div>
         </div>
