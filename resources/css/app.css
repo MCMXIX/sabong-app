@@ -141,7 +141,7 @@ body {
 }
 
 .total-bets {
-    @apply select-none font-bold text-yellow-300 ;
+    @apply select-none font-bold text-yellow-300 text-3xl;
 }
 
 .winning-chance {

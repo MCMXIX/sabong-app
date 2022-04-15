@@ -1,7 +1,7 @@
 <template>
     <div class="absolute w-full left-0 bg-black-dark h-screen top-0 pt-[96px]">
         <div class="game--status--left  pt-4">
-            <div class="text-center shadow-lg bg-gray-med w-1/4 py-5 mx-auto">
+            <div class="text-center shadow-lg bg-gray-med md:w-1/4 py-5 mx-auto">
                 <p class="inline label text-center font-medium text-4xl">FIGHT #</p>
                 <p class="inline text-4xl font-medium">1</p>
             </div>
@@ -16,11 +16,11 @@
                 <div class="bet--status--stake">
                     <div class="side--text--results flex text-center mt-8">
                         <div class="meron--stake--result w-full">
-                            <p class="total-bets text-8xl">35,563</p>
+                            <p class="total-bets text-3xl lg:text-8xl">35,563</p>
                             <p class="winning-chance text-4xl">192.16%</p>
                         </div>
                         <div class="meron--stake--result w-full">
-                            <p class="total-bets text-8xl">35</p>
+                            <p class="total-bets text-3xl lg:text-8xl">35</p>
                             <p class="winning-chance text-4xl">187.16%</p>
                         </div>
                     </div>

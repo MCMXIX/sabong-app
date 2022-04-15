@@ -3,13 +3,13 @@
         <div
             class="fight__container--info mt-4 lg:mt-14 bg-gray-dark shadow-lg rounded-lg p-2 lg:p-5 flex flex-col lg:flex-row justify-between">
             <div class="order-3 lg:order-1 meron__container">
-                <p class="text--success label--sides mb-4 text-4xl">MERON</p>
+                <p class="text--success label--sides mt-4 lg:mt-0 text-4xl">MERON</p>
                 <div class="side--text--results">
                     <p class="total-bets">{{ getFormattedTotalBet(oFightInfo.meron_bets) }}</p>
                     <p class="winning-chance">187.16%</p>
                 </div>
             </div>
-            <div class=" order-1 flex flex-col lg:order-1 fight--info__container mb-4">
+            <div class=" order-1 flex flex-col lg:order-1 fight--info__container lg:mb-4">
                 <div class="fight-number text-center order-1 lg:order-2">
                     <p class="inline label text-center font-medium text-3xl">FIGHT #</p>
                     <p class="inline text-3xl font-medium"> {{ oFightInfo.fight_no }} </p>
@@ -17,7 +17,7 @@
                 <p :class="[getStatusTextColor(oFightInfo.status), 'font-bold text-center text-3xl my-2 lg:mt-5 order-2 lg:order-2']">{{ getFightStatus(oFightInfo.status) }}</p>
             </div>
             <div class="order-2 lg:order-3  wala__container">
-                <p class="text--warn label--sides mb-4 text-4xl">WALA</p>
+                <p class="text--warn label--sides  text-4xl">WALA</p>
                 <div class="side--text--results ">
                     <p class="total-bets">{{ getFormattedTotalBet(oFightInfo.wala_bets) }}</p>
                     <p class="winning-chance">192.16%</p>
@@ -29,7 +29,7 @@
             <button @click="updateFightResult('C')" class="button--warn">CLOSE</button>
             <button @click="toggleFightResult()" class="button--secondary">DONE</button>
         </div>
-        <div class="fight__container--results mt-7 w-4/5 mx-auto">
+        <div class="fight__container--results mt-7 w-4/5 mx-auto mb-5">
             <fight-results />
         </div>
         <div class="fixed z-[60] inset-0 overflow-y-auto" :class="{'hidden' : fightDone}" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -139,7 +139,7 @@ export default {
 
             this.updateFight(oParameters);
             this.fightDone = true;
-        }
+        },
     }  
 }
 </script>
@@ -149,7 +149,7 @@ export default {
     @apply text-center px-3;
 }
 .fight--sides__label .label {
-    @apply text-2xl font-bold;
+    @apply text-4xl font-bold;
 }
 .result__button--container button {
     @apply min-w-[8rem];
